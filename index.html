@@ -1,0 +1,1483 @@
+<!doctype html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Записвай бакшишите си всеки ден и следи колко изкарваш: статистика, календар и напомняния. Записите остават само на телефона.">
+<meta name="theme-color" content="#F2F4F3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E1110" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Моят бакшиш">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>Моят бакшиш</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one column; grouped white sections on a soft grey ground;
+   fixed bottom tab bar; a single green accent. */
+:root{
+  --bg:#F2F4F3; --surface:#FFFFFF; --key:#FFFFFF; --key-press:#E4E9E6; --fill:#E9EDEB;
+  --text:#18201C; --text-2:#56615B; --text-3:#66716B; --line:#E1E6E3;
+  --accent:#1E7650; --accent-text:#1A6B48; --on-accent:#FFFFFF; --accent-soft:#E2F0E8;
+  --bar:#4E9C76; --bar-best:#0F4F33;
+  --down:#B42318; --warn:#C2410C; --warn-soft:#FDF0E7;
+  --heat-1:#88C09E; --heat-2:#5AA37C; --heat-3:#358460; --heat-4:#1D6547; --heat-5:#0F402C;
+  --heat-ink-1:#18201C; --heat-ink-2:#18201C; --heat-ink-3:#FFFFFF; --heat-ink-4:#FFFFFF; --heat-ink-5:#FFFFFF;
+  --shadow:0 1px 2px rgba(24,32,28,.12);
+  --tabbar:rgba(255,255,255,.92);
+  --font:"Sofia Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1110; --surface:#181C1A; --key:#202523; --key-press:#2A302D; --fill:#232826;
+    --text:#E9EEEB; --text-2:#A9B3AE; --text-3:#909A95; --line:#2A302D;
+    --accent:#3DAE76; --accent-text:#5CCB93; --on-accent:#06110B; --accent-soft:#17301F;
+    --bar:#2E8A5D; --bar-best:#8BDDB2;
+    --down:#F97066; --warn:#F2994A; --warn-soft:#2A1D12;
+    --heat-1:#295D46; --heat-2:#2D7553; --heat-3:#3F9C6F; --heat-4:#6CC094; --heat-5:#A9E2C2;
+    --heat-ink-1:#E9EEEB; --heat-ink-2:#E9EEEB; --heat-ink-3:#06110B; --heat-ink-4:#06110B; --heat-ink-5:#06110B;
+    --shadow:0 1px 2px rgba(0,0,0,.5);
+    --tabbar:rgba(24,28,26,.92);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"], :root[data-app-theme="dark"]{
+  --bg:#0E1110; --surface:#181C1A; --key:#202523; --key-press:#2A302D; --fill:#232826;
+  --text:#E9EEEB; --text-2:#A9B3AE; --text-3:#909A95; --line:#2A302D;
+  --accent:#3DAE76; --accent-text:#5CCB93; --on-accent:#06110B; --accent-soft:#17301F;
+  --bar:#2E8A5D; --bar-best:#8BDDB2;
+  --down:#F97066; --warn:#F2994A; --warn-soft:#2A1D12;
+  --heat-1:#295D46; --heat-2:#2D7553; --heat-3:#3F9C6F; --heat-4:#6CC094; --heat-5:#A9E2C2;
+  --heat-ink-1:#E9EEEB; --heat-ink-2:#E9EEEB; --heat-ink-3:#06110B; --heat-ink-4:#06110B; --heat-ink-5:#06110B;
+  --shadow:0 1px 2px rgba(0,0,0,.5);
+  --tabbar:rgba(24,28,26,.92);
+  color-scheme:dark;
+}
+:root[data-app-theme="light"]{
+  --bg:#F2F4F3; --surface:#FFFFFF; --key:#FFFFFF; --key-press:#E4E9E6; --fill:#E9EDEB;
+  --text:#18201C; --text-2:#56615B; --text-3:#66716B; --line:#E1E6E3;
+  --accent:#1E7650; --accent-text:#1A6B48; --on-accent:#FFFFFF; --accent-soft:#E2F0E8;
+  --bar:#4E9C76; --bar-best:#0F4F33;
+  --down:#B42318; --warn:#C2410C; --warn-soft:#FDF0E7;
+  --heat-1:#88C09E; --heat-2:#5AA37C; --heat-3:#358460; --heat-4:#1D6547; --heat-5:#0F402C;
+  --heat-ink-1:#18201C; --heat-ink-2:#18201C; --heat-ink-3:#FFFFFF; --heat-ink-4:#FFFFFF; --heat-ink-5:#FFFFFF;
+  --shadow:0 1px 2px rgba(24,32,28,.12);
+  --tabbar:rgba(255,255,255,.92);
+  color-scheme:light;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button,input,textarea{font:inherit;color:inherit}
+button{-webkit-tap-highlight-color:transparent}
+h1,h2,h3{text-wrap:balance}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sr{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.view[hidden]{display:none!important}
+
+.app{max-width:32rem;margin:0 auto;padding-inline:16px;padding-block:4px calc(90px + env(safe-area-inset-bottom,0px))}
+.top{padding-block:12px 8px}
+.top h1{margin:0;font-size:22px;font-weight:700;letter-spacing:-.01em}
+
+/* shared pieces */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:9px 16px;border:0;border-radius:12px;background:var(--fill);color:var(--text);font-weight:600;font-size:15px;line-height:1.2;text-align:center;text-decoration:none;cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn.small{min-height:34px;padding:6px 12px;font-size:14px}
+.btn[aria-disabled="true"]{opacity:.45;pointer-events:none}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.link{border:0;background:none;padding:10px 4px;color:var(--accent-text);font-weight:600;font-size:15px;cursor:pointer}
+.link.danger{color:var(--down)}
+.chip{min-height:36px;padding:6px 12px;border:0;border-radius:999px;background:var(--fill);color:var(--text);font-size:15px;font-weight:600;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.label{display:block;font-size:13px;font-weight:600;color:var(--text-2)}
+.small{font-size:14px;color:var(--text-3)}
+.navbtn{width:44px;height:44px;flex:none;display:grid;place-items:center;padding:0;border:0;border-radius:12px;background:transparent;color:var(--text);cursor:pointer}
+.navbtn svg{width:22px;height:22px}
+.navbtn:disabled{opacity:.28;cursor:default}
+
+.notice{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-bottom:10px;padding:10px 12px;border-radius:14px;background:var(--surface);font-size:15px}
+.notice p{margin:0;flex:1 1 12rem;min-width:0}
+.notice.warn{background:var(--warn-soft)}
+.notice .acts{display:flex;align-items:center;gap:4px}
+.closex{width:34px;height:34px;display:grid;place-items:center;padding:0;border:0;border-radius:10px;background:none;color:var(--text-2);font-size:22px;line-height:1;cursor:pointer}
+
+/* entry */
+.datebar{display:flex;align-items:center;gap:6px}
+.datelabel{flex:1;min-width:0;text-align:center;line-height:1.25}
+.date-rel{display:block;font-size:13px;font-weight:600;color:var(--accent-text)}
+.date-full{display:block;font-size:17px;font-weight:600}
+.hint{margin:6px 0 0;text-align:center;font-size:14px;color:var(--text-2)}
+.amountbox{padding-block:12px 12px;text-align:center}
+.amount{display:inline-flex;align-items:baseline;justify-content:center;gap:6px;max-width:100%;font-size:clamp(52px,16vw,66px);font-weight:700;line-height:1.05;letter-spacing:-.02em}
+.amount #amountNum{min-width:0;overflow-wrap:anywhere}
+.amount .cur{font-size:.5em;font-weight:600;color:var(--text-2)}
+.amount.is-empty{color:var(--text-3)}
+.amount.is-word{font-size:clamp(34px,10vw,44px)}
+.amount.is-word .cur{display:none}
+.amount-sub{min-height:1.5em;margin-top:4px;font-size:15px;color:var(--text-2);font-variant-numeric:tabular-nums}
+.amount-sub.ok{color:var(--accent-text);font-weight:600}
+
+.keypad{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.key{height:54px;display:flex;align-items:center;justify-content:center;padding:0;border:0;border-radius:14px;background:var(--key);box-shadow:var(--shadow);color:var(--text);font-size:26px;font-weight:500;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.key svg{width:26px;height:26px}
+.key:active{background:var(--key-press)}
+.key.plus{color:var(--accent-text);font-weight:600}
+.key.save{grid-column:span 2;background:var(--accent);color:var(--on-accent);font-size:19px;font-weight:700}
+.key.save:disabled{opacity:.4;cursor:not-allowed}
+.entry-actions{display:flex;justify-content:center;gap:24px;min-height:46px;margin-top:4px}
+
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:6px;border-radius:16px;background:var(--surface)}
+.pair > div{min-width:0;padding:12px 14px}
+.pair > div + div{border-left:1px solid var(--line)}
+.pair strong{display:block;margin-top:2px;font-size:20px;font-weight:700}
+
+/* stats */
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:2px;padding:3px;border-radius:12px;background:var(--fill)}
+.seg button{min-height:38px;padding:7px 4px;border:0;border-radius:9px;background:none;color:var(--text-2);font-size:15px;font-weight:600;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
+.periodnav{display:flex;align-items:center;gap:6px;margin-block:12px 4px}
+.ptitle{flex:1;min-width:0;text-align:center}
+.ptitle h2{margin:0;font-size:21px;font-weight:700;line-height:1.2}
+.psub{display:block;font-size:13px;color:var(--text-2)}
+.demo{margin:6px 0 0;text-align:center;font-size:14px;color:var(--text-2)}
+.pill{display:inline-block;margin-right:6px;padding:1px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent-text);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.total{padding-block:8px 14px;text-align:center}
+.total strong{display:block;font-size:44px;font-weight:700;line-height:1.1;letter-spacing:-.02em}
+.delta{display:block;margin-top:4px;font-size:14px;color:var(--text-2)}
+.delta .up{color:var(--accent-text);font-weight:700}
+.delta .down{color:var(--down);font-weight:700}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-radius:16px;background:var(--surface)}
+.tile{min-width:0;padding:12px 14px}
+.tile:nth-child(even){border-left:1px solid var(--line)}
+.tile:nth-child(n+3){border-top:1px solid var(--line)}
+.tile strong{display:block;margin-top:2px;font-size:20px;font-weight:700}
+.tile .small{display:block}
+.card{min-width:0;margin-top:12px;padding:14px;border-radius:16px;background:var(--surface)}
+.card h3{margin:0;font-size:17px;font-weight:700}
+.readout{min-height:1.45em;margin:2px 0 0;font-size:14px;color:var(--text-2)}
+.readout strong{color:var(--text)}
+.chart{min-height:110px;margin-top:6px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart .empty{margin:22px 0;text-align:center;color:var(--text-3)}
+.ax{fill:var(--text-3);font-family:var(--font);font-size:11px;font-variant-numeric:tabular-nums}
+.gridl,.basel{stroke:var(--line);stroke-width:1}
+.bar{fill:var(--bar)}
+.bar.best{fill:var(--bar-best)}
+.bar.zero{fill:var(--text-3)}
+.bar.on{opacity:.7}
+.avgline{stroke:var(--text-2);stroke-width:1}
+.chart-lbl{fill:var(--text);font-family:var(--font);font-size:11px;font-weight:700;paint-order:stroke;stroke:var(--surface);stroke-width:3px;stroke-linejoin:round}
+.chart-lbl.soft{fill:var(--text-2);font-weight:600}
+.hit{fill:transparent;cursor:pointer;outline:none}
+.hit:focus-visible{stroke:var(--accent);stroke-width:1.5}
+.tview{margin-top:6px;font-size:14px}
+.tview summary{padding:6px 0;color:var(--text-2);font-weight:600;cursor:pointer}
+.tscroll{overflow-x:auto}
+.tbl{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.tbl th,.tbl td{padding:6px 4px;border-top:1px solid var(--line);text-align:left;white-space:nowrap}
+.tbl th{border-top:0;font-size:13px;font-weight:600;color:var(--text-2)}
+.tbl .num{text-align:right}
+.wd{display:grid;grid-template-columns:2.2em minmax(0,1fr) auto;align-items:center;gap:8px 10px;margin-top:12px}
+.wd-name{font-size:14px;font-weight:600;color:var(--text-2)}
+.wd-track{position:relative;height:14px}
+.wd-bar{position:absolute;left:0;top:0;bottom:0;min-width:2px;border-radius:0 4px 4px 0;background:var(--bar)}
+.wd-bar.best{background:var(--bar-best)}
+.wd-val{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.wd-val small{margin-left:6px;font-size:12px;font-weight:500;color:var(--text-3)}
+.wd-none{grid-column:2 / -1;font-size:13px;color:var(--text-3)}
+
+/* calendar */
+.cal-sub{margin:0 0 10px;text-align:center;font-size:14px;color:var(--text-2)}
+.cal-head,.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cal-head span{padding-bottom:4px;text-align:center;font-size:12px;font-weight:600;color:var(--text-3)}
+.cell{position:relative;min-width:0;min-height:46px;aspect-ratio:1/1.05;display:flex;flex-direction:column;justify-content:space-between;align-items:stretch;padding:4px 5px;border:0;border-radius:9px;background:var(--surface);color:var(--text);font:inherit;text-align:left;cursor:pointer}
+.cell .dn{font-size:11px;font-weight:600;line-height:1}
+.cell .amt{align-self:flex-end;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+.cell.blank{visibility:hidden}
+.cell.future{background:transparent;color:var(--text-3);cursor:default}
+.cell.off .amt{color:var(--text-3)}
+.cell.missed{outline:2px dashed var(--warn);outline-offset:-2px}
+.cell.missed .amt{color:var(--warn)}
+.cell.today{box-shadow:inset 0 0 0 2px var(--text)}
+.h1{background:var(--heat-1);color:var(--heat-ink-1)}
+.h2{background:var(--heat-2);color:var(--heat-ink-2)}
+.h3{background:var(--heat-3);color:var(--heat-ink-3)}
+.h4{background:var(--heat-4);color:var(--heat-ink-4)}
+.h5{background:var(--heat-5);color:var(--heat-ink-5)}
+.legend{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin-top:14px;font-size:13px;color:var(--text-2)}
+.ramp,.lg{display:inline-flex;align-items:center;gap:5px}
+.ramp i{width:16px;height:14px;display:inline-block;border-radius:3px}
+.lg-missed{width:16px;height:14px;display:inline-block;border:2px dashed var(--warn);border-radius:3px}
+.lg-off{width:16px;height:14px;display:inline-grid;place-items:center;border-radius:3px;background:var(--surface);color:var(--text-3);font-size:11px;font-style:normal;line-height:1}
+
+/* settings */
+.group-title{margin:22px 4px 8px;font-size:13px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-2)}
+.group-title:first-child{margin-top:8px}
+.group{overflow:hidden;border-radius:16px;background:var(--surface)}
+.item{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;padding:11px 14px;border-top:1px solid var(--line)}
+.item:first-child{border-top:0}
+.item.block{display:block}
+.item > span:first-child{display:flex;flex-direction:column;min-width:0;font-weight:500}
+.item small{font-size:13px;color:var(--text-3)}
+.item p{margin:0}
+label.item{cursor:pointer}
+.item[hidden]{display:none}
+.daychips{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;margin-top:8px}
+.daychips .chip{padding:6px 0}
+input[type="time"]{flex:none;min-height:40px;padding:6px 10px;border:0;border-radius:10px;background:var(--fill);color:var(--text);font-size:17px;font-weight:600}
+.sw{position:relative;flex:none;width:50px;height:30px}
+.sw .knob{position:absolute;inset:0;border-radius:999px;background:var(--fill);transition:background .15s}
+.sw .knob::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:var(--surface);box-shadow:var(--shadow);transition:transform .15s}
+.sw input:checked + .knob{background:var(--accent)}
+.sw input:checked + .knob::after{transform:translateX(20px)}
+.sw input:focus-visible + .knob{outline:2px solid var(--accent);outline-offset:2px}
+.foot{margin:8px 4px 0;font-size:13px;color:var(--text-3)}
+.more{margin-top:10px}
+.more summary{padding:6px 0;font-weight:600;cursor:pointer}
+.steps{margin:6px 0 0;padding-left:1.3em;font-size:15px}
+.steps li{margin-top:4px}
+.linkbox,.exportbox{display:block;width:100%;margin-top:10px;padding:8px 10px;border:0;border-radius:10px;background:var(--fill);color:var(--text);font-size:13px}
+.exportbox{min-height:8em;resize:vertical;font-family:ui-monospace,Menlo,Consolas,monospace}
+.import{margin-top:12px;padding:12px;border-radius:12px;background:var(--fill);font-size:15px}
+.import p{margin:0}
+
+/* tab bar, toast */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:4px 8px calc(4px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--surface);background:var(--tabbar);-webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px)}
+.tabbar-in{max-width:32rem;margin:0 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.tab{min-height:52px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;border:0;background:none;color:var(--text-3);font-size:12px;font-weight:600;cursor:pointer}
+.tab svg{width:24px;height:24px}
+.tab[aria-current="page"]{color:var(--accent-text)}
+.toast{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:30;max-width:calc(100% - 32px);padding:10px 16px;border-radius:12px;background:var(--text);color:var(--surface);font-size:15px;font-weight:600;text-align:center;opacity:0;pointer-events:none;transform:translate(-50%,10px);transition:opacity .2s,transform .2s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion: reduce){
+  .toast,.sw .knob,.sw .knob::after{transition:none}
+}
+</style>
+</head>
+<body>
+
+
+<div class="app" id="app" lang="bg">
+  <header class="top"><h1>Моят бакшиш</h1></header>
+  <div class="notice warn" id="storageWarn" hidden><p>Този браузър не позволява запазване и записите ще изчезнат. Отвори линка в Safari или Chrome.</p></div>
+
+  <main>
+    <!-- ДНЕС -->
+    <section class="view" id="view-entry" aria-label="Запис">
+      <div class="notice warn" id="missed" hidden>
+        <p id="missedTitle">Липсва запис</p>
+        <div class="chips" id="missedChips"></div>
+      </div>
+      <div class="notice" id="backupNote" hidden>
+        <p>Записите са само на този телефон. Свали резервно копие.</p>
+        <div class="acts"><button class="btn small primary" type="button" id="backupNow">Свали</button><button class="btn small" type="button" id="backupLater">По-късно</button></div>
+      </div>
+      <div class="notice" id="installNote" hidden>
+        <p id="installText">Сложи я на началния екран като приложение.</p>
+        <div class="acts"><button class="btn small primary" type="button" id="installGo">Инсталирай</button><button class="closex" type="button" id="installClose" aria-label="Скрий">×</button></div>
+      </div>
+      <div class="notice" id="nudge" hidden>
+        <p>Искаш ли напомняне в работните дни?</p>
+        <div class="acts"><button class="btn small primary" type="button" data-goto="settings">Настрой</button><button class="closex" type="button" id="nudgeClose" aria-label="Скрий">×</button></div>
+      </div>
+
+      <div class="datebar">
+        <button class="navbtn" type="button" id="dPrev" aria-label="Предишен ден"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="datelabel"><span class="date-rel" id="dRel">Днес</span><span class="date-full" id="dFull">&nbsp;</span></div>
+        <button class="navbtn" type="button" id="dNext" aria-label="Следващ ден"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+      <p class="hint" id="nightHint" hidden>След полунощ записваме за смяната от предния ден.</p>
+
+      <div class="amountbox">
+        <div class="amount is-empty" id="amount" aria-live="polite"><span id="amountNum">0</span><span class="cur">€</span></div>
+        <div class="amount-sub" id="amountSub"></div>
+      </div>
+
+      <div class="keypad" id="keypad">
+        <button class="key" type="button" data-key="1">1</button>
+        <button class="key" type="button" data-key="2">2</button>
+        <button class="key" type="button" data-key="3">3</button>
+        <button class="key" type="button" data-key="4">4</button>
+        <button class="key" type="button" data-key="5">5</button>
+        <button class="key" type="button" data-key="6">6</button>
+        <button class="key" type="button" data-key="7">7</button>
+        <button class="key" type="button" data-key="8">8</button>
+        <button class="key" type="button" data-key="9">9</button>
+        <button class="key" type="button" data-key="," aria-label="Десетична запетая">,</button>
+        <button class="key" type="button" data-key="0">0</button>
+        <button class="key" type="button" data-key="back" aria-label="Изтрий последната цифра"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5h11a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H9l-6-7z"/><path d="M12.5 9.5l5 5M17.5 9.5l-5 5"/></svg></button>
+        <button class="key plus" type="button" data-key="+" aria-label="Добави още една сума">+</button>
+        <button class="key save" type="button" id="saveBtn" disabled>Запиши</button>
+      </div>
+
+      <div class="entry-actions">
+        <button class="link" type="button" id="offBtn">Почивен ден</button>
+        <button class="link" type="button" id="clearBtn" hidden>Изчисти</button>
+        <button class="link danger" type="button" id="delBtn" hidden>Изтрий записа</button>
+      </div>
+
+      <div class="pair">
+        <div><span class="label">Тази седмица</span><strong id="miniW">0,00&nbsp;€</strong><span class="small" id="miniWn"></span></div>
+        <div><span class="label" id="miniMl">Този месец</span><strong id="miniM">0,00&nbsp;€</strong><span class="small" id="miniMn"></span></div>
+      </div>
+    </section>
+
+    <!-- СТАТИСТИКА -->
+    <section class="view" id="view-stats" aria-label="Статистика" hidden>
+      <div class="seg" id="pSeg" role="group" aria-label="Период">
+        <button type="button" data-mode="week" aria-pressed="false">Седмица</button>
+        <button type="button" data-mode="month" aria-pressed="true">Месец</button>
+        <button type="button" data-mode="year" aria-pressed="false">Година</button>
+        <button type="button" data-mode="all" aria-pressed="false">Всичко</button>
+      </div>
+      <div class="periodnav">
+        <button class="navbtn" type="button" id="pPrev" aria-label="Предишен период"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="ptitle"><h2 id="pTitle">&nbsp;</h2><span class="psub" id="pSub"></span></div>
+        <button class="navbtn" type="button" id="pNext" aria-label="Следващ период"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+      <p class="demo" id="demoS" hidden><span class="pill">Пример</span>Измислени суми, докато нямаш свои записи.</p>
+      <div class="total"><span class="label">Общо</span><strong id="sTotal">0,00&nbsp;€</strong><span class="delta" id="sDelta"></span></div>
+      <div class="tiles" id="sTiles"></div>
+      <section class="card">
+        <h3 id="chTitle">По дни</h3>
+        <p class="readout" id="readout"></p>
+        <div class="chart" id="chart"></div>
+        <details class="tview"><summary>Покажи като таблица</summary><div class="tscroll" id="chTable"></div></details>
+      </section>
+      <section class="card" id="wdCard">
+        <h3>Кой ден носи най-много</h3>
+        <p class="readout" id="wdSub">Средно на работен ден</p>
+        <div class="wd" id="wd"></div>
+      </section>
+    </section>
+
+    <!-- КАЛЕНДАР -->
+    <section class="view" id="view-calendar" aria-label="Календар" hidden>
+      <div class="periodnav">
+        <button class="navbtn" type="button" id="cPrev" aria-label="Предишен месец"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="ptitle"><h2 id="cTitle">&nbsp;</h2></div>
+        <button class="navbtn" type="button" id="cNext" aria-label="Следващ месец"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+      <p class="cal-sub" id="cSub"></p>
+      <p class="demo" id="demoC" hidden><span class="pill">Пример</span>Измислени суми, докато нямаш свои записи.</p>
+      <div class="cal-head" aria-hidden="true"><span>пн</span><span>вт</span><span>ср</span><span>чт</span><span>пт</span><span>сб</span><span>нд</span></div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="legend" id="calLegend"></div>
+      <p class="foot">Докосни ден, за да го попълниш или промениш.</p>
+    </section>
+
+    <!-- НАСТРОЙКИ -->
+    <section class="view" id="view-settings" aria-label="Настройки" hidden>
+      <h2 class="group-title">Напомняне</h2>
+      <div class="group">
+        <div class="item block"><span class="label">Работни дни</span><div class="daychips" id="dayChips" role="group" aria-label="Работни дни"></div></div>
+        <label class="item" for="eveTime"><span>Вечер в</span><input type="time" id="eveTime" value="23:30"></label>
+        <label class="item" for="mornOn"><span>Второ напомняне сутрин<small>ако си забравил вечерта</small></span><span class="sw"><input type="checkbox" id="mornOn" class="sr" checked><span class="knob" aria-hidden="true"></span></span></label>
+        <label class="item" for="mornTime" id="mornRow"><span>Сутрин в</span><input type="time" id="mornTime" value="10:00"></label>
+        <div class="item block">
+          <p class="small" id="remSummary"></p>
+          <div class="btns">
+            <a class="btn primary" id="gEve" target="_blank" rel="noopener" aria-disabled="true">Добави в Google Календар</a>
+            <a class="btn" id="gMorn" target="_blank" rel="noopener" aria-disabled="true">Сутрешното също</a>
+          </div>
+          <p class="small" id="gNote" style="margin-top:8px"></p>
+          <details class="more"><summary>На iPhone</summary><ol class="steps" id="iosSteps"></ol></details>
+        </div>
+      </div>
+      <p class="foot">Апликацията сама показва пропуснатите работни дни, когато я отвориш.</p>
+
+      <h2 class="group-title">Тема</h2>
+      <div class="group"><div class="item block">
+        <div class="seg" id="themeSeg" role="group" aria-label="Тема">
+          <button type="button" data-theme-opt="auto" aria-pressed="true">Авто</button>
+          <button type="button" data-theme-opt="light" aria-pressed="false">Светла</button>
+          <button type="button" data-theme-opt="dark" aria-pressed="false">Тъмна</button>
+        </div>
+      </div></div>
+
+      <h2 class="group-title">Данни</h2>
+      <div class="group"><div class="item block">
+        <p>Записите се пазят само на този телефон.</p>
+        <p class="small" id="backupInfo"></p>
+        <div class="btns">
+          <button class="btn primary" type="button" id="exportBtn">Свали копие</button>
+          <label class="btn" for="importFile">Възстанови от копие</label>
+        </div>
+        <input type="file" id="importFile" class="sr" accept=".json,application/json">
+        <div class="import" id="importBox" hidden>
+          <p id="importText"></p>
+          <div class="btns"><button class="btn primary" type="button" id="importGo">Възстанови</button><button class="btn" type="button" id="importCancel">Откажи</button></div>
+        </div>
+        <textarea class="exportbox" id="exportBox" readonly hidden aria-label="Резервно копие като текст"></textarea>
+      </div></div>
+      <p class="foot">Отваряй апликацията винаги по един и същ начин: от иконата или от един и същ браузър. Всеки браузър пази отделни записи.</p>
+
+      <h2 class="group-title">На началния екран и за колеги</h2>
+      <div class="group"><div class="item block">
+        <ol class="steps">
+          <li><strong>iPhone:</strong> отвори линка в Safari → „Сподели“ → „Добави към началния екран“.</li>
+          <li><strong>Android:</strong> отвори линка в Chrome → ⋮ → „Инсталиране на приложението“ или „Добавяне към началния екран“.</li>
+          <li><strong>Колеги:</strong> изпрати им линка. Всеки вижда само своите записи на своя телефон.</li>
+        </ol>
+        <div class="btns"><button class="btn" type="button" id="copyLink">Копирай линка</button></div>
+        <input class="linkbox" id="linkBox" readonly hidden aria-label="Линк към апликацията">
+      </div></div>
+    </section>
+  </main>
+</div>
+
+<nav class="tabbar" aria-label="Раздели" lang="bg">
+  <div class="tabbar-in">
+    <button class="tab" type="button" data-tab="entry"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v8M8 12h8"/></svg><span>Запис</span></button>
+    <button class="tab" type="button" data-tab="stats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M6 20v-7M11 20V6M16 20v-9M20 20v-4"/></svg><span>Статистика</span></button>
+    <button class="tab" type="button" data-tab="calendar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Календар</span></button>
+    <button class="tab" type="button" data-tab="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 21h4"/></svg><span>Настройки</span></button>
+  </div>
+</nav>
+<div class="toast" id="toast" role="status" aria-live="polite" lang="bg"></div>
+
+<script id="bt-core">
+/* Pure logic: dates, money, statistics. No DOM. */
+var BTCore = (() => {
+  const MONTHS = ['януари','февруари','март','април','май','юни','юли','август','септември','октомври','ноември','декември'];
+  const MONTHS_ABBR = ['ян.','февр.','март','апр.','май','юни','юли','авг.','септ.','окт.','ноем.','дек.'];
+  const MONTHS_AX = ['ян','фев','мар','апр','май','юни','юли','авг','сеп','окт','ное','дек'];
+  const WD = ['понеделник','вторник','сряда','четвъртък','петък','събота','неделя'];
+  const WD_S = ['пн','вт','ср','чт','пт','сб','нд'];
+  const RR = ['MO','TU','WE','TH','FR','SA','SU'];
+  const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+  const TIME_RE = /^([01]\d|2[0-3]):[0-5]\d$/;
+  const NB = ' ';
+
+  const pad = n => String(n).padStart(2, '0');
+  const ymd = (y, m, d) => `${y}-${pad(m)}-${pad(d)}`;
+  const parts = s => { const [y, m, d] = s.split('-').map(Number); return { y, m, d }; };
+  const toT = s => { const p = parts(s); return Date.UTC(p.y, p.m - 1, p.d); };
+  const fromT = t => { const x = new Date(t); return ymd(x.getUTCFullYear(), x.getUTCMonth() + 1, x.getUTCDate()); };
+  const addDays = (s, n) => fromT(toT(s) + n * 864e5);
+  const diffDays = (a, b) => Math.round((toT(b) - toT(a)) / 864e5);
+  const weekday = s => (new Date(toT(s)).getUTCDay() + 6) % 7; // пн = 0
+  const today = (now = new Date()) => ymd(now.getFullYear(), now.getMonth() + 1, now.getDate());
+  const workDate = (now = new Date(), cutoff = 5) => now.getHours() < cutoff ? addDays(today(now), -1) : today(now);
+  const weekStart = s => addDays(s, -weekday(s));
+  const monthStart = s => { const p = parts(s); return ymd(p.y, p.m, 1); };
+  const dim = (y, m) => new Date(Date.UTC(y, m, 0)).getUTCDate();
+  const monthEnd = s => { const p = parts(s); return ymd(p.y, p.m, dim(p.y, p.m)); };
+  const addMonths = (s, n) => { const p = parts(s); const i = p.y * 12 + (p.m - 1) + n; return ymd(Math.floor(i / 12), (i % 12 + 12) % 12 + 1, 1); };
+  const monthsBetween = (a, b) => { const x = parts(a), y = parts(b); return (y.y - x.y) * 12 + (y.m - x.m); };
+  const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+  function periodRange(mode, anchor, first, todayStr) {
+    if (mode === 'week') { const s = weekStart(anchor); return { start: s, end: addDays(s, 6) }; }
+    if (mode === 'month') return { start: monthStart(anchor), end: monthEnd(anchor) };
+    if (mode === 'year') { const y = parts(anchor).y; return { start: `${y}-01-01`, end: `${y}-12-31` }; }
+    return { start: first && first < todayStr ? first : todayStr, end: todayStr };
+  }
+  function normAnchor(mode, s) {
+    if (mode === 'week') return weekStart(s);
+    if (mode === 'month') return monthStart(s);
+    if (mode === 'year') return `${parts(s).y}-01-01`;
+    return s;
+  }
+  function shiftAnchor(mode, anchor, dir) {
+    if (mode === 'week') return addDays(weekStart(anchor), 7 * dir);
+    if (mode === 'month') return addMonths(anchor, dir);
+    if (mode === 'year') return `${parts(anchor).y + dir}-01-01`;
+    return anchor;
+  }
+  // The same stretch of the previous period. A period still in progress is compared
+  // with the same number of days, so the 1st of a month is not set against a full month.
+  function compareRanges(mode, range, todayStr) {
+    if (mode === 'all' || range.start > todayStr) return null;
+    const curEnd = range.end > todayStr ? todayStr : range.end;
+    const partial = curEnd !== range.end;
+    const prevStart = mode === 'week' ? addDays(range.start, -7)
+      : mode === 'month' ? addMonths(range.start, -1)
+      : `${parts(range.start).y - 1}-01-01`;
+    const prevFullEnd = mode === 'week' ? addDays(prevStart, 6)
+      : mode === 'month' ? monthEnd(prevStart)
+      : `${parts(prevStart).y}-12-31`;
+    let prevEnd = prevFullEnd;
+    if (partial) { const e = addDays(prevStart, diffDays(range.start, curEnd)); prevEnd = e < prevFullEnd ? e : prevFullEnd; }
+    return { cur: { start: range.start, end: curEnd }, prev: { start: prevStart, end: prevEnd }, partial };
+  }
+
+  function stats(entries, start, end) {
+    let total = 0, count = 0, off = 0, best = null;
+    for (const d in entries) {
+      if (d < start || d > end) continue;
+      const v = entries[d];
+      if (v.off) { off++; continue; }
+      total += v.cents; count++;
+      if (!best || v.cents > best.cents || (v.cents === best.cents && d > best.date)) best = { date: d, cents: v.cents };
+    }
+    return { total, count, off, avg: count ? Math.round(total / count) : 0, best };
+  }
+  function daySeries(entries, start, end) {
+    const out = [];
+    for (let d = start; d <= end; d = addDays(d, 1)) {
+      const v = entries[d];
+      out.push({ key: d, cents: v && !v.off ? v.cents : null, off: !!(v && v.off), count: v && !v.off ? 1 : 0 });
+    }
+    return out;
+  }
+  function monthSeries(entries, firstMonth, lastMonth) {
+    const out = [], idx = {};
+    for (let m = firstMonth; m <= lastMonth; m = addMonths(m, 1)) { idx[m.slice(0, 7)] = out.length; out.push({ key: m, cents: 0, count: 0 }); }
+    for (const d in entries) {
+      const v = entries[d]; if (v.off) continue;
+      const i = idx[d.slice(0, 7)]; if (i === undefined) continue;
+      out[i].cents += v.cents; out[i].count++;
+    }
+    for (const o of out) if (!o.count) o.cents = null;
+    return out;
+  }
+  function yearSeries(entries, y0, y1) {
+    const out = [];
+    for (let y = y0; y <= y1; y++) out.push({ key: `${y}-01-01`, cents: 0, count: 0 });
+    for (const d in entries) {
+      const v = entries[d]; if (v.off) continue;
+      const i = parts(d).y - y0; if (i < 0 || i >= out.length) continue;
+      out[i].cents += v.cents; out[i].count++;
+    }
+    for (const o of out) if (!o.count) o.cents = null;
+    return out;
+  }
+  function weekdayStats(entries, start, end) {
+    const sum = [0, 0, 0, 0, 0, 0, 0], cnt = [0, 0, 0, 0, 0, 0, 0];
+    for (const d in entries) {
+      if (d < start || d > end) continue;
+      const v = entries[d]; if (v.off) continue;
+      const w = weekday(d); sum[w] += v.cents; cnt[w]++;
+    }
+    return sum.map((s, i) => ({ wd: i, count: cnt[i], avg: cnt[i] ? Math.round(s / cnt[i]) : null }));
+  }
+  // Working days before the current shift that have no entry, newest first.
+  function missedDays(entries, workDays, wDate, first, lookback = 14) {
+    const out = [];
+    if (!workDays || !workDays.length || !first) return out;
+    for (let i = 1; i <= lookback; i++) {
+      const d = addDays(wDate, -i);
+      if (d < first) break;
+      if (workDays.includes(weekday(d)) && !entries[d]) out.push(d);
+    }
+    return out;
+  }
+
+  // Keypad: "35+12,5" -> 4750 cents. Bulgarian decimal comma, at most 2 decimals per amount.
+  const TERM_RE = /^(\d{1,5})(?:,(\d{0,2}))?$/;
+  function exprCents(expr) {
+    if (!expr) return null;
+    let sum = 0, any = false;
+    for (const t of expr.split('+')) {
+      if (t === '') continue;
+      const m = TERM_RE.exec(t);
+      if (!m) return null;
+      sum += parseInt(m[1], 10) * 100 + parseInt((m[2] || '').padEnd(2, '0'), 10);
+      any = true;
+    }
+    return any ? sum : null;
+  }
+  function pressKey(expr, key) {
+    const terms = expr.split('+');
+    const cur = terms[terms.length - 1];
+    if (/^\d$/.test(key)) {
+      if (cur.includes(',')) return cur.split(',')[1].length >= 2 ? expr : expr + key;
+      if (cur === '0') return expr.slice(0, -1) + key;
+      if (cur.length >= 5) return expr;
+      return expr + key;
+    }
+    if (key === ',') return cur.includes(',') ? expr : expr + (cur === '' ? '0,' : ',');
+    if (key === '+') {
+      if (cur === '' || terms.length >= 12) return expr;
+      return (cur.endsWith(',') ? expr.slice(0, -1) : expr) + '+';
+    }
+    if (key === 'back') return expr.slice(0, -1);
+    if (key === 'clear') return '';
+    return expr;
+  }
+
+  // Bulgarian number style: decimal comma, space groups only from 10 000 up.
+  function groupInt(n) { const s = String(n); return s.length >= 5 ? s.replace(/\B(?=(\d{3})+(?!\d))/g, NB) : s; }
+  function fmtMoney(cents, dec = 2) {
+    const neg = cents < 0, c = Math.abs(Math.round(cents));
+    const s = dec === 0 ? groupInt(Math.round(c / 100)) : groupInt(Math.floor(c / 100)) + ',' + pad(c % 100);
+    return (neg ? '−' : '') + s;
+  }
+  const eur = (cents, dec) => fmtMoney(cents, dec) + NB + '€';
+  function fmtTyped(term) {
+    const [i, d] = term.split(',');
+    const g = groupInt(i === '' ? '0' : i);
+    return d === undefined ? g : g + ',' + d;
+  }
+  function compactEur(cents) {
+    const e = cents / 100;
+    if (e >= 10000) return Math.round(e / 1000) + 'k';
+    if (e >= 1000) return (Math.round(e / 100) / 10).toString().replace('.', ',') + 'k';
+    return String(Math.round(e));
+  }
+
+  const dateLong = (s, withYear) => { const p = parts(s); return `${WD[weekday(s)]}, ${p.d} ${MONTHS[p.m - 1]}${withYear ? ' ' + p.y : ''}`; };
+  const dateShort = (s, withYear) => { const p = parts(s); return `${WD_S[weekday(s)]}, ${p.d} ${MONTHS_ABBR[p.m - 1]}${withYear ? ' ' + p.y : ''}`; };
+  const monthTitle = s => { const p = parts(s); return `${cap(MONTHS[p.m - 1])} ${p.y}`; };
+  function weekTitle(start) {
+    const end = addDays(start, 6), a = parts(start), b = parts(end);
+    if (a.m === b.m) return `${a.d} – ${b.d} ${MONTHS_ABBR[b.m - 1]} ${b.y}`;
+    if (a.y === b.y) return `${a.d} ${MONTHS_ABBR[a.m - 1]} – ${b.d} ${MONTHS_ABBR[b.m - 1]} ${b.y}`;
+    return `${a.d} ${MONTHS_ABBR[a.m - 1]} ${a.y} – ${b.d} ${MONTHS_ABBR[b.m - 1]} ${b.y}`;
+  }
+  const listBg = a => a.length <= 1 ? a.join('') : a.slice(0, -1).join(', ') + ' и ' + a[a.length - 1];
+  const daysText = days => days.length === 7 ? 'всеки ден' : listBg(days.map(i => WD_S[i]));
+  const workDaysWord = n => n === 1 ? '1 работен ден' : `${n} работни дни`;
+
+  const shiftDays = (days, n) => [...new Set(days.map(d => ((d + n) % 7 + 7) % 7))].sort((a, b) => a - b);
+  // A reminder set after midnight belongs to the next calendar day.
+  function reminderPlan(st) {
+    const wd = st.workDays.slice().sort((a, b) => a - b);
+    if (!wd.length) return null;
+    const eh = parseInt(st.eveTime.slice(0, 2), 10);
+    return { eveDays: eh < 5 ? shiftDays(wd, 1) : wd, mornDays: shiftDays(wd, 1), eveTime: st.eveTime, mornTime: st.mornTime, mornOn: st.mornOn };
+  }
+  function firstOn(days, from) {
+    for (let i = 0; i < 7; i++) { const d = addDays(from, i); if (days.includes(weekday(d))) return d; }
+    return from;
+  }
+  function gcalUrl(o) {
+    const start = firstOn(o.days, o.from);
+    const hm = o.time.split(':').map(Number);
+    const sMin = hm[0] * 60 + hm[1], eMin = sMin + 15;
+    const endDate = eMin >= 1440 ? addDays(start, 1) : start;
+    const f = (d, mins) => d.replace(/-/g, '') + 'T' + pad(Math.floor(mins / 60)) + pad(mins % 60) + '00';
+    const q = new URLSearchParams();
+    q.set('action', 'TEMPLATE');
+    q.set('text', o.title);
+    q.set('dates', f(start, sMin) + '/' + f(endDate, eMin % 1440));
+    if (o.tz) q.set('ctz', o.tz);
+    q.set('recur', 'RRULE:FREQ=WEEKLY;BYDAY=' + o.days.map(i => RR[i]).join(','));
+    if (o.details) q.set('details', o.details);
+    return 'https://calendar.google.com/calendar/render?' + q.toString();
+  }
+
+  // Five equal-count bins over all worked days, so a colour means the same in every month.
+  function heatScale(values) {
+    const v = values.filter(x => x != null).sort((a, b) => a - b);
+    if (!v.length) return null;
+    const min = v[0], max = v[v.length - 1];
+    const th = v.length >= 10
+      ? [0.2, 0.4, 0.6, 0.8].map(p => v[Math.round(p * (v.length - 1))])
+      : [1, 2, 3, 4].map(i => min + (max - min) * i / 5);
+    return { th, min, max };
+  }
+  function heatLevel(c, sc) {
+    if (!sc || sc.max === sc.min) return 3;
+    let l = 1;
+    for (const t of sc.th) if (c > t) l++;
+    return l;
+  }
+  function niceMax(maxCents) {
+    const maxE = maxCents / 100;
+    if (!(maxE > 0)) return { max: 3000, step: 1000 };
+    const raw = maxE / 3, p = Math.pow(10, Math.floor(Math.log10(raw))), f = raw / p;
+    const nf = f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10;
+    const step = nf * p, top = Math.ceil(maxE / step - 1e-9) * step;
+    return { max: Math.round(top * 100), step: Math.round(step * 100) };
+  }
+
+  // Example data for the empty state. Never stored.
+  function demoEntries(endDate, days = 150) {
+    let seed = 20261;
+    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    const base = [0, 30, 33, 37, 54, 66, 46];
+    const out = {};
+    for (let i = days - 1; i >= 0; i--) {
+      const d = addDays(endDate, -i), w = weekday(d);
+      if (w === 0) continue;
+      if (rnd() < 0.06) { out[d] = { off: true }; continue; }
+      out[d] = { cents: Math.round(base[w] * (0.7 + rnd() * 0.65) * 2) * 50 };
+    }
+    return out;
+  }
+
+  function sanitizeEntry(v) {
+    if (!v || typeof v !== 'object') return null;
+    if (v.off === true) return { off: true };
+    if (Number.isFinite(v.cents) && v.cents >= 0 && v.cents <= 99999999) return { cents: Math.round(v.cents) };
+    return null;
+  }
+  function sanitizeSettings(v) {
+    const o = { workDays: [], eveTime: '23:30', mornOn: true, mornTime: '10:00' };
+    if (!v || typeof v !== 'object') return o;
+    if (Array.isArray(v.workDays)) o.workDays = [...new Set(v.workDays.filter(n => Number.isInteger(n) && n >= 0 && n <= 6))].sort((a, b) => a - b);
+    if (typeof v.eveTime === 'string' && TIME_RE.test(v.eveTime)) o.eveTime = v.eveTime;
+    if (typeof v.mornOn === 'boolean') o.mornOn = v.mornOn;
+    if (typeof v.mornTime === 'string' && TIME_RE.test(v.mornTime)) o.mornTime = v.mornTime;
+    return o;
+  }
+  function buildBackup(entries, settings, nowIso) {
+    return {
+      app: 'Бакшиш тефтер', format: 1, exportedAt: nowIso, currency: 'EUR', settings,
+      entries: Object.keys(entries).sort().map(d => entries[d].off ? { date: d, off: true } : { date: d, eur: entries[d].cents / 100 })
+    };
+  }
+  function parseBackup(obj) {
+    const list = Array.isArray(obj) ? obj : obj && Array.isArray(obj.entries) ? obj.entries : null;
+    if (!list) return null;
+    const entries = {};
+    for (const it of list) {
+      if (!it || typeof it.date !== 'string' || !DATE_RE.test(it.date)) continue;
+      if (it.off === true) { entries[it.date] = { off: true }; continue; }
+      let c = null;
+      if (Number.isFinite(it.cents)) c = Math.round(it.cents);
+      else if (Number.isFinite(it.eur)) c = Math.round(it.eur * 100);
+      else if (typeof it.eur === 'string' && /^\d+(?:[.,]\d{1,2})?$/.test(it.eur.trim())) c = Math.round(parseFloat(it.eur.trim().replace(',', '.')) * 100);
+      if (c === null || c < 0 || c > 99999999) continue;
+      entries[it.date] = { cents: c };
+    }
+    return { entries, settings: !Array.isArray(obj) && obj.settings ? sanitizeSettings(obj.settings) : null };
+  }
+
+  return {
+    MONTHS, MONTHS_ABBR, MONTHS_AX, WD, WD_S, DATE_RE, TIME_RE, NB,
+    pad, ymd, parts, addDays, diffDays, weekday, today, workDate, weekStart, monthStart, monthEnd, dim, addMonths, monthsBetween, cap,
+    periodRange, normAnchor, shiftAnchor, compareRanges, stats, daySeries, monthSeries, yearSeries, weekdayStats, missedDays,
+    exprCents, pressKey, fmtMoney, eur, fmtTyped, compactEur, dateLong, dateShort, monthTitle, weekTitle, listBg, daysText, workDaysWord,
+    shiftDays, reminderPlan, gcalUrl, heatScale, heatLevel, niceMax, demoEntries, sanitizeEntry, sanitizeSettings, buildBackup, parseBackup
+  };
+})();
+</script>
+
+<script>
+(() => {
+  'use strict';
+  const C = BTCore;
+  const IN_CLAUDE = !!(window.claude && typeof window.claude.use === 'function');
+  const APP_URL = IN_CLAUDE ? 'https://claude.ai/artifact/BXs1AAP3hHVWLp6hVVenHt' : location.href.split('#')[0].split('?')[0];
+  const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const isInstalled = () => { try { return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true; } catch (e) { return false; } };
+  let installPrompt = null;
+  const KEY = 'mb1:data';
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+  const parseJSON = s => { if (s == null) return null; try { return JSON.parse(s); } catch (e) { return undefined; } };
+  const THEMES = ['auto', 'light', 'dark'];
+
+  /* ---------- storage: everything lives on this phone ---------- */
+  let storageOk = true;
+  function readKey(k) { try { return localStorage.getItem(k); } catch (e) { storageOk = false; return null; } }
+  function writeKey(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } }
+  function cleanMap(o) {
+    const out = {};
+    if (o && typeof o === 'object') for (const d in o) { if (!C.DATE_RE.test(d)) continue; const e = C.sanitizeEntry(o[d]); if (e) out[d] = e; }
+    return out;
+  }
+  function blank() {
+    return { v: 1, entries: {}, settings: C.sanitizeSettings(null), theme: 'auto', lastBackup: null, nudgeHidden: false, installHidden: false, backupSnooze: null };
+  }
+  function cleanData(o) {
+    const d = blank();
+    if (!o || typeof o !== 'object') return d;
+    d.entries = cleanMap(o.entries);
+    d.settings = C.sanitizeSettings(o.settings);
+    if (THEMES.includes(o.theme)) d.theme = o.theme;
+    if (typeof o.lastBackup === 'string' && !isNaN(Date.parse(o.lastBackup))) d.lastBackup = o.lastBackup;
+    d.nudgeHidden = o.nudgeHidden === true;
+    d.installHidden = o.installHidden === true;
+    if (typeof o.backupSnooze === 'string' && C.DATE_RE.test(o.backupSnooze)) d.backupSnooze = o.backupSnooze;
+    return d;
+  }
+  // The first version kept its copy under bt1:* keys. Carry it over once.
+  function fromFirstVersion() {
+    const cache = parseJSON(readKey('bt1:cache')), pending = parseJSON(readKey('bt1:pending'));
+    if (!cache && !pending) return null;
+    const d = blank();
+    d.entries = cleanMap(cache && cache.entries);
+    if (pending && typeof pending === 'object') for (const k in pending) {
+      if (!C.DATE_RE.test(k)) continue;
+      const p = pending[k];
+      if (p && p.op === 'del') delete d.entries[k];
+      else if (p && p.op === 'set') { const v = C.sanitizeEntry(p.v); if (v) d.entries[k] = v; }
+    }
+    d.settings = C.sanitizeSettings(cache && cache.settings);
+    const th = parseJSON(readKey('bt1:theme'));
+    if (THEMES.includes(th)) d.theme = th;
+    d.nudgeHidden = parseJSON(readKey('bt1:nudge')) === true;
+    return d;
+  }
+  function persist(d) {
+    const ok = writeKey(KEY, JSON.stringify(d));
+    storageOk = ok;
+    $('storageWarn').hidden = ok;
+    return ok;
+  }
+  function load() {
+    const raw = readKey(KEY), parsed = parseJSON(raw);
+    if (raw != null && parsed === undefined) writeKey('mb1:damaged-' + Date.now(), raw); // keep a damaged copy, never overwrite it silently
+    if (parsed && typeof parsed === 'object') return cleanData(parsed);
+    const d = fromFirstVersion() || blank();
+    persist(d);
+    return d;
+  }
+
+  const S = {
+    data: blank(), entries: {}, realCount: 0, first: null,
+    tab: 'entry', selDate: C.workDate(), expr: '', delArmed: 0,
+    period: { mode: 'month', anchor: C.monthStart(C.today()) },
+    calAnchor: C.monthStart(C.today()), anchorsTouched: false,
+    demo: null, chartArgs: null, readoutIdx: -1,
+    importData: null, downloads: null, lastWorkDate: C.workDate()
+  };
+  const save = () => persist(S.data);
+  function recompute() {
+    S.entries = S.data.entries;
+    const ks = Object.keys(S.entries).sort();
+    S.realCount = ks.length;
+    S.first = ks.length ? ks[0] : null;
+  }
+  const isDemo = () => S.realCount === 0;
+  function demoData() { if (!S.demo) S.demo = C.demoEntries(C.addDays(C.today(), -1)); return S.demo; }
+  function syncAnchors() {
+    if (S.anchorsTouched) return;
+    const ref = isDemo() ? C.addDays(C.today(), -1) : C.today();
+    S.period.anchor = C.normAnchor(S.period.mode, ref);
+    S.calAnchor = C.monthStart(ref);
+  }
+  function putEntry(d, v) {
+    if (v) S.data.entries[d] = v; else delete S.data.entries[d];
+    save(); recompute();
+  }
+
+  /* ---------- UI helpers ---------- */
+  let toastTimer = null;
+  function toast(msg) {
+    const t = $('toast'); t.textContent = msg; t.classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+  }
+  function go(tab) {
+    S.tab = tab;
+    for (const id of ['entry', 'stats', 'calendar', 'settings']) $('view-' + id).hidden = id !== tab;
+    for (const b of document.querySelectorAll('.tab')) {
+      if (b.dataset.tab === tab) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current');
+    }
+    render();
+    try { window.scrollTo(0, 0); } catch (e) { /* ignore */ }
+  }
+  function selectDate(d) {
+    const t = C.today();
+    S.selDate = d > t ? t : d; S.expr = ''; S.delArmed = 0;
+    go('entry');
+  }
+  function render() {
+    recompute();
+    if (S.tab === 'entry') renderEntry();
+    else if (S.tab === 'stats') renderStats();
+    else if (S.tab === 'calendar') renderCal();
+    else renderSettings();
+  }
+  function daysAgo(iso) {
+    const n = Math.floor((Date.now() - Date.parse(iso)) / 864e5);
+    return n <= 0 ? 'днес' : n === 1 ? 'вчера' : `преди ${n} дни`;
+  }
+  function backupDue() {
+    if (S.realCount < 10) return false;
+    if (S.data.backupSnooze && C.today() < S.data.backupSnooze) return false;
+    return !S.data.lastBackup || Date.now() - Date.parse(S.data.lastBackup) > 30 * 864e5;
+  }
+
+  /* ---------- entry ---------- */
+  function renderEntry() {
+    const t = C.today(), d = S.selDate, e = S.entries[d];
+    const diff = C.diffDays(d, t);
+    $('dRel').textContent = diff === 0 ? 'Днес' : diff === 1 ? 'Вчера' : `Преди ${diff} дни`;
+    $('dFull').textContent = C.dateLong(d, C.parts(d).y !== C.parts(t).y);
+    $('dNext').disabled = d >= t;
+    $('nightHint').hidden = !(new Date().getHours() < 5 && d === C.workDate());
+
+    const typed = S.expr !== '';
+    const cents = C.exprCents(S.expr);
+    const terms = S.expr.split('+').filter(Boolean);
+    let num = '0', cls = 'amount is-empty', sub = 'Въведи сумата', subOk = false;
+    if (typed) {
+      const multi = S.expr.includes('+');
+      num = multi ? C.fmtMoney(cents == null ? 0 : cents) : C.fmtTyped(S.expr);
+      cls = 'amount';
+      const parts = [];
+      if (multi) parts.push(terms.map(C.fmtTyped).join(' + ') + (S.expr.endsWith('+') ? ' + …' : ' ='));
+      if (e) parts.push(e.off ? 'вместо почивен ден' : `вместо ${C.eur(e.cents)}`);
+      sub = parts.join(' · ');
+    } else if (e && e.off) { num = 'Почивен ден'; cls = 'amount is-word'; sub = ''; }
+    else if (e) { num = C.fmtMoney(e.cents); cls = 'amount'; sub = '✓ Записано'; subOk = true; }
+    $('amount').className = cls;
+    $('amountNum').textContent = num;
+    const subEl = $('amountSub');
+    subEl.textContent = sub;
+    subEl.className = 'amount-sub' + (subOk ? ' ok' : '');
+
+    const saveBtn = $('saveBtn');
+    saveBtn.disabled = cents == null;
+    saveBtn.textContent = e ? 'Замени' : 'Запиши';
+    $('offBtn').hidden = !!e || typed;
+    $('clearBtn').hidden = !typed;
+    const del = $('delBtn');
+    del.hidden = !e || typed;
+    del.textContent = S.delArmed && Date.now() - S.delArmed < 4000 ? 'Натисни пак за изтриване' : 'Изтрий записа';
+
+    // notices: missed days first, then either the backup reminder or the reminder set-up
+    const missed = C.missedDays(S.entries, S.data.settings.workDays, C.workDate(), S.first);
+    $('missed').hidden = !missed.length;
+    if (missed.length) {
+      $('missedTitle').textContent = missed.length === 1 ? 'Няма запис за този работен ден:' : `Няма запис за ${missed.length} работни дни:`;
+      const wrap = $('missedChips'); wrap.textContent = '';
+      for (const md of missed.slice(0, 4)) {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'chip'; b.dataset.date = md;
+        b.setAttribute('aria-pressed', String(md === d));
+        b.textContent = C.dateShort(md);
+        wrap.appendChild(b);
+      }
+    }
+    // one more notice at most: backup, then installing on the home screen, then reminders
+    const due = backupDue();
+    const canInstall = !IN_CLAUDE && !isInstalled() && !S.data.installHidden && (installPrompt || IS_IOS);
+    $('backupNote').hidden = !due;
+    $('installNote').hidden = due || !canInstall;
+    if (canInstall) {
+      $('installText').textContent = installPrompt ? 'Сложи я на началния екран като приложение.' : 'Сложи я на началния екран: „Сподели“ → „Добави към началния екран“.';
+      $('installGo').hidden = !installPrompt;
+    }
+    $('nudge').hidden = due || canInstall || S.data.settings.workDays.length > 0 || S.data.nudgeHidden;
+
+    const ws = C.weekStart(t), w = C.stats(S.entries, ws, C.addDays(ws, 6));
+    const m = C.stats(S.entries, C.monthStart(t), C.monthEnd(t));
+    $('miniW').textContent = C.eur(w.total);
+    $('miniWn').textContent = w.count ? C.workDaysWord(w.count) : 'няма записи';
+    $('miniMl').textContent = C.cap(C.MONTHS[C.parts(t).m - 1]);
+    $('miniM').textContent = C.eur(m.total);
+    $('miniMn').textContent = m.count ? C.workDaysWord(m.count) : 'няма записи';
+  }
+  function saveTyped() {
+    const c = C.exprCents(S.expr);
+    if (c == null) return;
+    const d = S.selDate;
+    putEntry(d, { cents: c });
+    S.expr = '';
+    toast(`Записано: ${C.eur(c)} за ${C.dateShort(d)}`);
+    render();
+  }
+
+  /* ---------- stats ---------- */
+  function prevLabel(mode, cmp) {
+    const p = C.parts(cmp.prev.start);
+    if (mode === 'week') return cmp.partial ? 'спрямо същите дни миналата седмица' : 'спрямо предходната седмица';
+    if (mode === 'month') {
+      const name = C.MONTHS[p.m - 1] + (p.y !== C.parts(cmp.cur.start).y ? ' ' + p.y : '');
+      return cmp.partial ? `спрямо същите дни на ${name}` : `спрямо ${name}`;
+    }
+    return cmp.partial ? `спрямо същия период на ${p.y}` : `спрямо ${p.y}`;
+  }
+  function tile(label, value, sub) {
+    return `<div class="tile"><span class="label">${esc(label)}</span><strong>${esc(value)}</strong>${sub ? `<span class="small">${esc(sub)}</span>` : ''}</div>`;
+  }
+  function renderStats() {
+    syncAnchors();
+    const P = S.period, t = C.today();
+    for (const b of $('pSeg').querySelectorAll('button')) b.setAttribute('aria-pressed', String(b.dataset.mode === P.mode));
+    const demo = isDemo();
+    $('demoS').hidden = !demo;
+    const E = demo ? demoData() : S.entries;
+    const keys = Object.keys(E).sort();
+    const first = keys.length ? keys[0] : null;
+    const r = C.periodRange(P.mode, P.anchor, first, t);
+
+    let title, sub = '';
+    if (P.mode === 'week') {
+      title = C.weekTitle(r.start);
+      sub = r.start === C.weekStart(t) ? 'тази седмица' : r.start === C.addDays(C.weekStart(t), -7) ? 'миналата седмица' : '';
+    } else if (P.mode === 'month') title = C.monthTitle(r.start);
+    else if (P.mode === 'year') title = String(C.parts(r.start).y);
+    else { title = 'Всичко'; if (first) { const f = C.parts(first); sub = `от ${C.MONTHS[f.m - 1]} ${f.y}`; } }
+    $('pTitle').textContent = title;
+    $('pSub').textContent = sub; $('pSub').hidden = !sub;
+    $('pPrev').disabled = P.mode === 'all' || !first || r.start <= first;
+    $('pNext').disabled = P.mode === 'all' || C.shiftAnchor(P.mode, r.start, 1) > t;
+
+    // total, comparison, tiles
+    const st = C.stats(E, r.start, r.end);
+    $('sTotal').textContent = C.eur(st.total);
+    const dl = $('sDelta'), tiles = $('sTiles');
+    if (!st.count && !st.off) {
+      dl.textContent = 'Няма записи за този период.';
+      tiles.hidden = true;
+    } else {
+      dl.textContent = '';
+      const cmp = C.compareRanges(P.mode, r, t);
+      if (cmp) {
+        const cur = C.stats(E, cmp.cur.start, cmp.cur.end).total;
+        const prev = C.stats(E, cmp.prev.start, cmp.prev.end).total;
+        if (prev > 0) {
+          const pct = Math.round((cur - prev) / prev * 100);
+          const head = pct > 0 ? `<span class="up">▲ ${pct}%</span>` : pct < 0 ? `<span class="down">▼ ${Math.abs(pct)}%</span>` : '<span>= 0%</span>';
+          dl.innerHTML = `${head} ${esc(prevLabel(P.mode, cmp))}`;
+        }
+      }
+      let h = tile('Работни дни', String(st.count));
+      h += tile('Средно на ден', st.count ? C.eur(st.avg) : '—');
+      h += tile('Най-добър ден', st.best ? C.eur(st.best.cents) : '—', st.best ? C.dateShort(st.best.date, C.parts(st.best.date).y !== C.parts(t).y) : '');
+      let fourth = tile('Почивни дни', String(st.off));
+      if (P.mode === 'year' || P.mode === 'all') {
+        const ms = C.monthSeries(E, C.monthStart(r.start), C.monthStart(r.end)).filter(x => x.cents != null);
+        if (ms.length > 1) {
+          const bm = ms.reduce((a, b) => b.cents > a.cents ? b : a), bp = C.parts(bm.key);
+          fourth = tile('Най-добър месец', C.eur(bm.cents), `${C.MONTHS[bp.m - 1]} ${bp.y}`);
+        }
+      }
+      tiles.innerHTML = h + fourth;
+      tiles.hidden = false;
+    }
+
+    // chart
+    let series, unit, chTitle;
+    if (P.mode === 'week' || P.mode === 'month') { series = C.daySeries(E, r.start, r.end); unit = 'day'; chTitle = 'По дни'; }
+    else if (P.mode === 'year') { series = C.monthSeries(E, r.start, `${C.parts(r.start).y}-12-01`); unit = 'month'; chTitle = 'По месеци'; }
+    else {
+      const fm = C.monthStart(r.start), lm = C.monthStart(t);
+      if (C.monthsBetween(fm, lm) < 24) { series = C.monthSeries(E, fm, lm); unit = 'month'; chTitle = 'По месеци'; }
+      else { series = C.yearSeries(E, C.parts(fm).y, C.parts(t).y); unit = 'year'; chTitle = 'По години'; }
+    }
+    $('chTitle').textContent = chTitle;
+    let avg = 0, bestKey = null;
+    if (unit === 'day') { avg = st.count > 1 ? st.avg : 0; bestKey = st.best && st.count > 1 ? st.best.date : null; }
+    else {
+      const withData = series.filter(x => x.cents != null);
+      if (withData.length > 1) {
+        avg = Math.round(withData.reduce((a, x) => a + x.cents, 0) / withData.length);
+        bestKey = withData.reduce((a, b) => b.cents > a.cents ? b : a).key;
+      }
+    }
+    S.chartArgs = { series, unit, avg, bestKey, title: chTitle };
+    S.readoutIdx = -1;
+    drawChart();
+    $('chTable').innerHTML = tableHtml(series, unit);
+
+    // weekdays
+    const wdCard = $('wdCard');
+    if (P.mode === 'week' || !st.count) { wdCard.hidden = true; return; }
+    wdCard.hidden = false;
+    const wst = C.weekdayStats(E, r.start, r.end);
+    const max = Math.max(...wst.map(w => w.avg || 0));
+    let bestW = -1;
+    wst.forEach((w, i) => { if (w.avg != null && (bestW < 0 || w.avg > wst[bestW].avg)) bestW = i; });
+    const showBest = bestW >= 0 && st.count >= 4;
+    $('wdSub').textContent = 'Средно на работен ден' + (showBest ? ` · най-силен е ${C.WD[bestW]}` : '');
+    let h = '';
+    wst.forEach((w, i) => {
+      h += `<span class="wd-name">${C.WD_S[i]}</span>`;
+      if (w.avg == null) { h += '<span class="wd-none">няма записи</span>'; return; }
+      const pct = max ? Math.max(1.5, w.avg / max * 100) : 0;
+      h += `<span class="wd-track"><span class="wd-bar${i === bestW && showBest ? ' best' : ''}" style="width:${pct.toFixed(1)}%"></span></span>`;
+      h += `<span class="wd-val">${esc(C.eur(w.avg, 0))}<small>${w.count}&nbsp;${w.count === 1 ? 'ден' : 'дни'}</small></span>`;
+    });
+    $('wd').innerHTML = h;
+  }
+
+  function readoutText(s, unit) {
+    let head, val;
+    if (unit === 'day') head = C.dateShort(s.key);
+    else if (unit === 'month') { const p = C.parts(s.key); head = `${C.cap(C.MONTHS[p.m - 1])} ${p.y}`; }
+    else head = String(C.parts(s.key).y);
+    if (s.cents != null) val = C.eur(s.cents) + (unit !== 'day' ? ` · ${C.workDaysWord(s.count)}` : '');
+    else val = s.off ? 'почивен ден' : unit === 'day' ? 'няма запис' : 'няма записи';
+    return { head, val };
+  }
+  function setReadout(i) {
+    const A = S.chartArgs, el = $('readout');
+    for (const b of $('chart').querySelectorAll('.bar.on')) b.classList.remove('on');
+    if (!A || i < 0 || i >= A.series.length) {
+      if (A && A.avg) {
+        const per = A.unit === 'day' ? 'на ден' : A.unit === 'month' ? 'на месец' : 'на година';
+        el.innerHTML = `Линията е средното: <strong>${esc(C.eur(A.avg))}</strong> ${per}. Докосни стълбче за сумата.`;
+      } else el.textContent = A ? 'Докосни стълбче, за да видиш сумата.' : '';
+      return;
+    }
+    S.readoutIdx = i;
+    const r = readoutText(A.series[i], A.unit);
+    el.innerHTML = `${esc(r.head)} — <strong>${esc(r.val)}</strong>`;
+    const bar = $('chart').querySelector(`.bar[data-i="${i}"]`);
+    if (bar) bar.classList.add('on');
+  }
+  function barPath(x, y, w, base, rad) {
+    const h = base - y, r = Math.max(0, Math.min(rad, w / 2, h));
+    const f = n => n.toFixed(1);
+    return `M${f(x)},${f(base)}V${f(y + r)}Q${f(x)},${f(y)} ${f(x + r)},${f(y)}H${f(x + w - r)}Q${f(x + w)},${f(y)} ${f(x + w)},${f(y + r)}V${f(base)}Z`;
+  }
+  function drawChart() {
+    const host = $('chart'), A = S.chartArgs;
+    if (!A) { host.innerHTML = ''; return; }
+    const { series, unit, avg, bestKey } = A;
+    const vals = series.map(s => s.cents).filter(v => v != null);
+    if (!vals.length) { host.innerHTML = '<p class="empty">Няма записи за този период.</p>'; $('readout').textContent = ''; return; }
+    const W = Math.max(260, Math.round(host.clientWidth || 320));
+    const twoLine = unit === 'day' && series.length <= 7;
+    const H = twoLine ? 212 : 198, L = 46, R = 8, T = 22, B = twoLine ? 34 : 22;
+    const pw = W - L - R, ph = H - T - B;
+    const sc = C.niceMax(Math.max(avg || 0, ...vals));
+    const yv = v => T + ph - (v / sc.max) * ph;
+    const base = yv(0);
+    const n = series.length, band = pw / n, bw = Math.max(2, Math.min(24, band - 2));
+    const dec = sc.step % 100 ? 2 : 0;
+    let grid = '', bars = '', labels = '', hits = '', marks = '', bestI = -1;
+    for (let v = 0; v <= sc.max + 1; v += sc.step) {
+      const y = yv(v).toFixed(1);
+      grid += `<line class="${v === 0 ? 'basel' : 'gridl'}" x1="${L}" x2="${W - R}" y1="${y}" y2="${y}"/>`;
+      grid += `<text class="ax" x="${L - 8}" y="${y}" dy="0.32em" text-anchor="end">${C.fmtMoney(v, dec)} €</text>`;
+    }
+    series.forEach((s, i) => {
+      const cx = L + band * i + band / 2, x = cx - bw / 2;
+      if (s.cents != null) {
+        if (s.cents === 0) bars += `<rect class="bar zero" data-i="${i}" x="${x.toFixed(1)}" y="${(base - 2).toFixed(1)}" width="${bw.toFixed(1)}" height="2"/>`;
+        else bars += `<path class="bar${s.key === bestKey ? ' best' : ''}" data-i="${i}" d="${barPath(x, yv(s.cents), bw, base, 4)}"/>`;
+        if (s.key === bestKey) bestI = i;
+      }
+      const p = C.parts(s.key), ly = H - B + 15;
+      if (unit === 'day') {
+        if (twoLine) labels += `<text class="ax" x="${cx.toFixed(1)}" y="${ly}" text-anchor="middle">${C.WD_S[C.weekday(s.key)]}</text><text class="ax" x="${cx.toFixed(1)}" y="${ly + 14}" text-anchor="middle">${p.d}</text>`;
+        else if (p.d === 1 || (p.d % 5 === 0 && p.d <= 25) || (i === n - 1 && p.d - 25 >= 4)) labels += `<text class="ax" x="${cx.toFixed(1)}" y="${ly}" text-anchor="middle">${p.d}</text>`;
+      } else if (unit === 'month') {
+        const every = Math.max(1, Math.ceil(26 / band)); // keep month names from touching
+        if (i % every === 0) labels += `<text class="ax" x="${cx.toFixed(1)}" y="${ly}" text-anchor="middle">${p.m === 1 && n > 12 ? String(p.y) : C.MONTHS_AX[p.m - 1]}</text>`;
+      } else labels += `<text class="ax" x="${cx.toFixed(1)}" y="${ly}" text-anchor="middle">${p.y}</text>`;
+      const r = readoutText(s, unit);
+      hits += `<rect class="hit" data-i="${i}" x="${(L + band * i).toFixed(1)}" y="${T - 6}" width="${band.toFixed(1)}" height="${(ph + 6).toFixed(1)}" tabindex="0" role="img" aria-label="${esc(r.head + ': ' + r.val)}"/>`;
+    });
+    if (avg) {
+      const y = yv(avg).toFixed(1);
+      marks += `<line class="avgline" x1="${L}" x2="${W - R}" y1="${y}" y2="${y}"/>`;
+    }
+    if (bestI >= 0) {
+      const cx = Math.min(W - R - 18, Math.max(L + 18, L + band * bestI + band / 2));
+      marks += `<text class="chart-lbl" x="${cx.toFixed(1)}" y="${(yv(series[bestI].cents) - 6).toFixed(1)}" text-anchor="middle">${C.fmtMoney(series[bestI].cents, 0)} €</text>`;
+    }
+    host.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="group" aria-label="${esc(A.title)}">${grid}${bars}${marks}${labels}${hits}</svg>`;
+    setReadout(S.readoutIdx);
+  }
+  function tableHtml(series, unit) {
+    const rows = series.filter(s => s.cents != null || s.off);
+    if (!rows.length) return '<p class="small">Няма записи.</p>';
+    const head = unit === 'day' ? 'Ден' : unit === 'month' ? 'Месец' : 'Година';
+    let h = `<table class="tbl"><thead><tr><th scope="col">${head}</th><th scope="col" class="num">Бакшиш</th>${unit !== 'day' ? '<th scope="col" class="num">Дни</th>' : ''}</tr></thead><tbody>`;
+    for (const s of rows) {
+      const r = readoutText(s, unit);
+      h += `<tr><td>${esc(r.head)}</td><td class="num">${esc(s.cents != null ? C.eur(s.cents) : 'почивен ден')}</td>${unit !== 'day' ? `<td class="num">${s.count}</td>` : ''}</tr>`;
+    }
+    return h + '</tbody></table>';
+  }
+
+  /* ---------- calendar ---------- */
+  function renderCal() {
+    syncAnchors();
+    const demo = isDemo();
+    $('demoC').hidden = !demo;
+    const E = demo ? demoData() : S.entries;
+    const t = C.today(), wDate = C.workDate(), a = S.calAnchor, p = C.parts(a), nDays = C.dim(p.y, p.m);
+    $('cTitle').textContent = C.monthTitle(a);
+    const st = C.stats(E, a, C.monthEnd(a));
+    $('cSub').textContent = st.count ? `Общо ${C.eur(st.total)} · ${C.workDaysWord(st.count)}` : 'Няма записи за този месец';
+    $('cNext').disabled = C.addMonths(a, 1) > t;
+    const sc = C.heatScale(Object.keys(E).filter(k => !E[k].off).map(k => E[k].cents));
+    const first = demo ? null : S.first;
+    const work = S.data.settings.workDays;
+    let h = '';
+    for (let i = 0, lead = C.weekday(a); i < lead; i++) h += '<span class="cell blank" aria-hidden="true"></span>';
+    for (let d = 1; d <= nDays; d++) {
+      const ds = C.ymd(p.y, p.m, d), e = E[ds], future = ds > t;
+      const missed = !e && !future && first && ds >= first && ds < wDate && work.includes(C.weekday(ds));
+      let cls = 'cell', amt = '', aria = C.dateLong(ds);
+      if (future) cls += ' future';
+      else if (e && e.off) { cls += ' off'; amt = '—'; aria += ': почивен ден'; }
+      else if (e) { cls += ' h' + C.heatLevel(e.cents, sc); amt = C.compactEur(e.cents); aria += ': ' + C.eur(e.cents); }
+      else if (missed) { cls += ' missed'; amt = '?'; aria += ': липсва запис'; }
+      else aria += ': няма запис';
+      if (ds === t) { cls += ' today'; aria += ', днес'; }
+      h += `<button type="button" class="${cls}" data-date="${ds}"${future ? ' disabled' : ''} aria-label="${esc(aria)}"><span class="dn">${d}</span><span class="amt">${esc(amt)}</span></button>`;
+    }
+    $('calGrid').innerHTML = h;
+    let lg = '';
+    if (sc) lg += `<span class="ramp"><span>${esc(C.eur(sc.min, 0))}</span><i class="h1"></i><i class="h2"></i><i class="h3"></i><i class="h4"></i><i class="h5"></i><span>${esc(C.eur(sc.max, 0))}</span></span>`;
+    if (work.length && !demo) lg += '<span class="lg"><i class="lg-missed"></i>липсва запис</span>';
+    lg += '<span class="lg"><i class="lg-off">—</i>почивен ден</span>';
+    $('calLegend').innerHTML = lg;
+  }
+
+  /* ---------- settings ---------- */
+  function changeSettings(patch) {
+    S.data.settings = C.sanitizeSettings(Object.assign({}, S.data.settings, patch));
+    save(); renderSettings();
+  }
+  function renderSettings() {
+    const s = S.data.settings;
+    const chips = $('dayChips');
+    if (!chips.children.length) {
+      C.WD_S.forEach((w, i) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'chip'; b.dataset.wd = String(i);
+        b.textContent = w; b.setAttribute('aria-label', C.WD[i]);
+        chips.appendChild(b);
+      });
+    }
+    for (const b of chips.children) b.setAttribute('aria-pressed', String(s.workDays.includes(+b.dataset.wd)));
+    if (document.activeElement !== $('eveTime')) $('eveTime').value = s.eveTime;
+    if (document.activeElement !== $('mornTime')) $('mornTime').value = s.mornTime;
+    $('mornOn').checked = s.mornOn;
+    $('mornRow').hidden = !s.mornOn;
+
+    const plan = C.reminderPlan(s), gE = $('gEve'), gM = $('gMorn');
+    if (!plan) {
+      $('remSummary').textContent = 'Избери поне един работен ден.';
+      for (const el of [gE, gM]) { el.removeAttribute('href'); el.setAttribute('aria-disabled', 'true'); }
+      gM.hidden = !s.mornOn;
+      $('gNote').textContent = '';
+      $('iosSteps').innerHTML = '<li>Първо избери работните си дни.</li>';
+    } else {
+      $('remSummary').textContent = `Вечер ${plan.eveTime}: ${C.daysText(plan.eveDays)}` + (plan.mornOn ? `. Сутрин ${plan.mornTime}: ${C.daysText(plan.mornDays)}.` : '.');
+      let tz = '';
+      try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) { tz = ''; }
+      const from = C.today();
+      gE.href = C.gcalUrl({ title: 'Бакшиш: запиши сумата за днес', details: 'Отвори „Моят бакшиш“ и въведи сумата.\n' + APP_URL, days: plan.eveDays, time: plan.eveTime, from, tz });
+      gE.removeAttribute('aria-disabled');
+      gM.hidden = !plan.mornOn;
+      if (plan.mornOn) {
+        gM.href = C.gcalUrl({ title: 'Бакшиш: записа ли снощната сума?', details: 'Ако снощи не си записал бакшиша, направи го сега.\n' + APP_URL, days: plan.mornDays, time: plan.mornTime, from, tz });
+        gM.removeAttribute('aria-disabled');
+      }
+      $('gNote').textContent = 'Ако в Google Календар дните не са избрани, натисни „Не се повтаря“ и ги отбележи. Сложи известие „0 минути преди“.';
+      let steps = '<li>Отвори „Напомняния“ и добави ново: <b>Бакшиш</b>.</li>' +
+        `<li>Включи дата и час: <b>${esc(plan.eveTime)}</b>.</li>` +
+        `<li>„Повтаряне“ → „Персонализирано“ → „Седмично“: <b>${esc(C.daysText(plan.eveDays))}</b>.</li>` +
+        '<li>В полето „URL“ постави линка (бутонът „Копирай линка“ е най-долу).</li>';
+      if (plan.mornOn) steps += `<li>Второ напомняне: <b>${esc(plan.mornTime)}</b>, <b>${esc(C.daysText(plan.mornDays))}</b>.</li>`;
+      $('iosSteps').innerHTML = steps;
+    }
+
+    for (const b of $('themeSeg').querySelectorAll('button')) b.setAttribute('aria-pressed', String(b.dataset.themeOpt === S.data.theme));
+    $('backupInfo').textContent = S.data.lastBackup ? `Последно копие: ${daysAgo(S.data.lastBackup)}.` : 'Още нямаш резервно копие.';
+  }
+  function applyTheme() {
+    const r = document.documentElement;
+    if (S.data.theme === 'light' || S.data.theme === 'dark') r.setAttribute('data-app-theme', S.data.theme);
+    else r.removeAttribute('data-app-theme');
+  }
+
+  /* ---------- backup ---------- */
+  function markBackup() { S.data.lastBackup = new Date().toISOString(); S.data.backupSnooze = null; save(); }
+  function blobDownload(name, text) {
+    try {
+      const url = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
+      const a = document.createElement('a');
+      a.href = url; a.download = name; a.rel = 'noopener';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+      return true;
+    } catch (e) { return false; }
+  }
+  async function shareFile(name, text) {
+    const file = new File([text], name, { type: 'application/json' });
+    if (!(navigator.canShare && navigator.canShare({ files: [file] }))) return 'no';
+    try { await navigator.share({ files: [file], title: 'Моят бакшиш: резервно копие' }); return 'ok'; }
+    catch (e) { return e && e.name === 'AbortError' ? 'cancel' : 'no'; }
+  }
+  async function exportBackup() {
+    const text = JSON.stringify(C.buildBackup(S.entries, S.data.settings, new Date().toISOString()), null, 2);
+    const name = `moyat-bakshish-${C.today()}.json`;
+    if (S.downloads) {
+      try { await S.downloads.save({ filename: name, data: text }); markBackup(); toast('Копието е запазено.'); render(); return; }
+      catch (e) {
+        const code = e && e.code;
+        if (code === 'declined') { toast('Свалянето е отказано.'); return; }
+        if (code === 'rate_limited') { toast('Опитай пак след малко.'); return; }
+      }
+    } else if (!IN_CLAUDE) {
+      // iPhone: the share sheet's "Save to Files"; elsewhere a normal download
+      if (IS_IOS) {
+        const r = await shareFile(name, text);
+        if (r === 'ok') { markBackup(); toast('Копието е запазено.'); render(); return; }
+        if (r === 'cancel') { toast('Запазването е отказано.'); return; }
+      }
+      if (blobDownload(name, text)) { markBackup(); toast('Копието е свалено в „Изтегляния“.'); render(); return; }
+    }
+    const box = $('exportBox');
+    box.hidden = false; box.value = text;
+    try { await navigator.clipboard.writeText(text); markBackup(); toast('Копието е в клипборда. Запази го в бележка или имейл.'); }
+    catch (e) { box.focus(); box.select(); toast('Копирай текста от полето и го запази.'); }
+    render();
+  }
+  function onImportFile(file) {
+    if (!file) return;
+    const rd = new FileReader();
+    rd.onload = () => {
+      let parsed = null;
+      try { parsed = C.parseBackup(JSON.parse(String(rd.result))); } catch (e) { parsed = null; }
+      const n = parsed ? Object.keys(parsed.entries).length : 0;
+      if (!parsed || !n) { toast('Файлът не прилича на резервно копие.'); return; }
+      S.importData = parsed;
+      const ks = Object.keys(parsed.entries).sort();
+      const overlap = ks.filter(k => S.entries[k]).length;
+      const span = ks.length === 1 ? `за ${C.dateShort(ks[0], true)}` : `от ${C.dateShort(ks[0], true)} до ${C.dateShort(ks[ks.length - 1], true)}`;
+      $('importText').textContent = `Във файла има ${n} ${n === 1 ? 'запис' : 'записа'} (${span}).` +
+        (overlap ? ` ${overlap} от тях ще заменят записи, които вече имаш.` : '');
+      $('importBox').hidden = false;
+    };
+    rd.onerror = () => toast('Файлът не може да бъде прочетен.');
+    rd.readAsText(file);
+  }
+  function applyImport() {
+    const p = S.importData; if (!p) return;
+    const ks = Object.keys(p.entries);
+    for (const d of ks) S.data.entries[d] = p.entries[d];
+    if (p.settings && !S.data.settings.workDays.length && p.settings.workDays.length) S.data.settings = p.settings;
+    save(); recompute();
+    S.importData = null; $('importBox').hidden = true; $('importFile').value = '';
+    toast(`Възстановени ${ks.length} ${ks.length === 1 ? 'запис' : 'записа'}.`);
+    render();
+  }
+
+  /* ---------- events ---------- */
+  function bind() {
+    for (const b of document.querySelectorAll('.tab')) b.addEventListener('click', () => go(b.dataset.tab));
+    document.addEventListener('click', ev => { const g = ev.target.closest('[data-goto]'); if (g) go(g.dataset.goto); });
+    $('nudgeClose').addEventListener('click', () => { S.data.nudgeHidden = true; save(); renderEntry(); });
+    $('installClose').addEventListener('click', () => { S.data.installHidden = true; save(); renderEntry(); });
+    $('installGo').addEventListener('click', async () => {
+      if (!installPrompt) return;
+      const p = installPrompt; installPrompt = null;
+      try { p.prompt(); await p.userChoice; } catch (e) { /* the browser closed the prompt */ }
+      renderEntry();
+    });
+    window.addEventListener('beforeinstallprompt', ev => { ev.preventDefault(); installPrompt = ev; if (S.tab === 'entry') renderEntry(); });
+    window.addEventListener('appinstalled', () => { installPrompt = null; toast('Апликацията е на началния екран.'); if (S.tab === 'entry') renderEntry(); });
+    $('backupNow').addEventListener('click', exportBackup);
+    $('backupLater').addEventListener('click', () => { S.data.backupSnooze = C.addDays(C.today(), 7); save(); renderEntry(); });
+    $('missedChips').addEventListener('click', ev => { const b = ev.target.closest('[data-date]'); if (b) selectDate(b.dataset.date); });
+    $('dPrev').addEventListener('click', () => selectDate(C.addDays(S.selDate, -1)));
+    $('dNext').addEventListener('click', () => { if (S.selDate < C.today()) selectDate(C.addDays(S.selDate, 1)); });
+
+    $('keypad').addEventListener('click', ev => {
+      const b = ev.target.closest('button'); if (!b) return;
+      if (b.id === 'saveBtn') { saveTyped(); return; }
+      const k = b.dataset.key; if (!k) return;
+      S.expr = C.pressKey(S.expr, k); S.delArmed = 0; renderEntry();
+    });
+    document.addEventListener('keydown', ev => {
+      if (S.tab !== 'entry' || ev.metaKey || ev.ctrlKey || ev.altKey) return;
+      const tg = ev.target;
+      if (tg && (tg.tagName === 'INPUT' || tg.tagName === 'TEXTAREA' || tg.isContentEditable)) return;
+      let k = null;
+      if (/^\d$/.test(ev.key)) k = ev.key;
+      else if (ev.key === ',' || ev.key === '.') k = ',';
+      else if (ev.key === '+') k = '+';
+      else if (ev.key === 'Backspace') k = 'back';
+      else if (ev.key === 'Escape') k = 'clear';
+      else if (ev.key === 'Enter' && !(tg && tg.tagName === 'BUTTON')) { if (C.exprCents(S.expr) != null) { ev.preventDefault(); saveTyped(); } return; }
+      if (k) { ev.preventDefault(); S.expr = C.pressKey(S.expr, k); renderEntry(); }
+    });
+    $('offBtn').addEventListener('click', () => { putEntry(S.selDate, { off: true }); toast(`Отбелязано: почивен ден, ${C.dateShort(S.selDate)}`); render(); });
+    $('clearBtn').addEventListener('click', () => { S.expr = ''; renderEntry(); });
+    $('delBtn').addEventListener('click', () => {
+      if (S.delArmed && Date.now() - S.delArmed < 4000) { S.delArmed = 0; putEntry(S.selDate, null); toast('Записът е изтрит.'); render(); return; }
+      S.delArmed = Date.now(); renderEntry();
+      setTimeout(() => { if (S.delArmed && Date.now() - S.delArmed >= 4000) { S.delArmed = 0; if (S.tab === 'entry') renderEntry(); } }, 4100);
+    });
+
+    $('pSeg').addEventListener('click', ev => {
+      const b = ev.target.closest('[data-mode]'); if (!b) return;
+      S.period.mode = b.dataset.mode; S.anchorsTouched = false; renderStats();
+    });
+    $('pPrev').addEventListener('click', () => { S.period.anchor = C.shiftAnchor(S.period.mode, S.period.anchor, -1); S.anchorsTouched = true; renderStats(); });
+    $('pNext').addEventListener('click', () => { S.period.anchor = C.shiftAnchor(S.period.mode, S.period.anchor, 1); S.anchorsTouched = true; renderStats(); });
+    const pick = ev => { const h = ev.target.closest && ev.target.closest('.hit'); if (h) setReadout(+h.dataset.i); };
+    $('chart').addEventListener('pointerover', pick);
+    $('chart').addEventListener('click', pick);
+    $('chart').addEventListener('focusin', pick);
+    if (typeof ResizeObserver === 'function') {
+      let lastW = 0, raf = 0;
+      new ResizeObserver(en => {
+        const w = Math.round(en[0].contentRect.width);
+        if (w === lastW || S.tab !== 'stats') return;
+        lastW = w; cancelAnimationFrame(raf); raf = requestAnimationFrame(drawChart);
+      }).observe($('chart'));
+    }
+
+    $('cPrev').addEventListener('click', () => { S.calAnchor = C.addMonths(S.calAnchor, -1); S.anchorsTouched = true; renderCal(); });
+    $('cNext').addEventListener('click', () => { const nx = C.addMonths(S.calAnchor, 1); if (nx <= C.today()) { S.calAnchor = nx; S.anchorsTouched = true; renderCal(); } });
+    $('calGrid').addEventListener('click', ev => { const b = ev.target.closest('.cell[data-date]'); if (b && !b.disabled) selectDate(b.dataset.date); });
+
+    $('dayChips').addEventListener('click', ev => {
+      const b = ev.target.closest('[data-wd]'); if (!b) return;
+      const i = +b.dataset.wd, set = new Set(S.data.settings.workDays);
+      if (set.has(i)) set.delete(i); else set.add(i);
+      changeSettings({ workDays: [...set] });
+    });
+    $('eveTime').addEventListener('change', ev => { if (C.TIME_RE.test(ev.target.value)) changeSettings({ eveTime: ev.target.value }); });
+    $('mornTime').addEventListener('change', ev => { if (C.TIME_RE.test(ev.target.value)) changeSettings({ mornTime: ev.target.value }); });
+    $('mornOn').addEventListener('change', ev => changeSettings({ mornOn: ev.target.checked }));
+    $('themeSeg').addEventListener('click', ev => {
+      const b = ev.target.closest('[data-theme-opt]'); if (!b) return;
+      S.data.theme = b.dataset.themeOpt; save(); applyTheme(); renderSettings();
+    });
+    $('copyLink').addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(APP_URL); toast('Линкът е копиран.'); }
+      catch (e) { const box = $('linkBox'); box.hidden = false; box.value = APP_URL; box.focus(); box.select(); toast('Копирай линка от полето.'); }
+    });
+    $('exportBtn').addEventListener('click', exportBackup);
+    $('importFile').addEventListener('change', ev => onImportFile(ev.target.files && ev.target.files[0]));
+    $('importGo').addEventListener('click', applyImport);
+    $('importCancel').addEventListener('click', () => { S.importData = null; $('importBox').hidden = true; $('importFile').value = ''; });
+
+    // the same app open in another tab on this phone
+    window.addEventListener('storage', ev => {
+      if (ev.key !== KEY || ev.newValue == null) return;
+      const p = parseJSON(ev.newValue);
+      if (p && typeof p === 'object') { S.data = cleanData(p); applyTheme(); render(); }
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState !== 'visible') return;
+      const wd = C.workDate();
+      if (S.tab === 'entry' && !S.expr && S.selDate < wd && S.lastWorkDate !== wd) S.selDate = wd;
+      S.lastWorkDate = wd;
+      render();
+    });
+  }
+
+  /* ---------- start ---------- */
+  try { document.documentElement.lang = 'bg'; } catch (e) { /* ignore */ }
+  S.data = load();
+  if (!storageOk) $('storageWarn').hidden = false;
+  try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {}); } catch (e) { /* not offered here */ }
+  applyTheme();
+  const h = (location.hash || '').slice(1);
+  if (['entry', 'stats', 'calendar', 'settings'].includes(h)) S.tab = h;
+  recompute();
+  bind();
+  go(S.tab);
+  if (IN_CLAUDE) window.claude.use('downloads').then(d => { S.downloads = d || null; }).catch(() => { S.downloads = null; });
+  // offline support when the app runs from its own address (GitHub Pages)
+  const secure = location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  if (!IN_CLAUDE && secure && 'serviceWorker' in navigator) {
+    window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => { /* offline mode unavailable */ }); });
+  }
+})();
+</script>
+</body>
+</html>
