@@ -1466,7 +1466,7 @@ var BTCore = (() => {
   // offline support when the app runs from its own address (GitHub Pages)
   const secure = location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
   if (!IN_CLAUDE && secure && 'serviceWorker' in navigator) {
-    window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => { /* offline mode unavailable */ }); });
+    window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).catch(() => { /* offline mode unavailable */ }); });
   }
 })();
 </script>

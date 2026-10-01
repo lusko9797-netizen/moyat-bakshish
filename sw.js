@@ -1,6 +1,6 @@
 // Моят бакшиш: works offline after the first visit.
 // Pages come from the network when it is there (so updates show up), otherwise from the cache.
-const CACHE = 'moyat-bakshish-v2';
+const CACHE = 'moyat-bakshish-v3';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png', './icons/favicon-32.png'];
 
 self.addEventListener('install', event => {
@@ -21,8 +21,9 @@ self.addEventListener('fetch', event => {
   const url = new URL(req.url);
 
   if (req.mode === 'navigate') {
+    // ask the server every time (cheap 304 when nothing changed), so updates appear on the next open
     event.respondWith(
-      fetch(req)
+      fetch(new Request(req.url, { cache: 'no-cache', credentials: 'same-origin' }))
         .then(res => {
           if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put('./index.html', copy)); }
           return res;
