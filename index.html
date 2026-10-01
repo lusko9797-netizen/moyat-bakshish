@@ -153,7 +153,6 @@ h1,h2,h3{text-wrap:balance}
 .ptitle{flex:1;min-width:0;text-align:center}
 .ptitle h2{margin:0;font-size:21px;font-weight:700;line-height:1.2}
 .psub{display:block;font-size:13px;color:var(--text-2)}
-.demo{margin:6px 0 0;text-align:center;font-size:14px;color:var(--text-2)}
 .pill{display:inline-block;margin-right:6px;padding:1px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent-text);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
 .total{padding-block:8px 14px;text-align:center}
 .total strong{display:block;font-size:44px;font-weight:700;line-height:1.1;letter-spacing:-.02em}
@@ -349,7 +348,6 @@ input[type="time"]{flex:none;min-height:40px;padding:6px 10px;border:0;border-ra
         <div class="ptitle"><h2 id="pTitle">&nbsp;</h2><span class="psub" id="pSub"></span></div>
         <button class="navbtn" type="button" id="pNext" aria-label="Следващ период"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
       </div>
-      <p class="demo" id="demoS" hidden><span class="pill">Пример</span>Измислени суми, докато нямаш свои записи.</p>
       <div class="total"><span class="label">Общо</span><strong id="sTotal">0,00&nbsp;€</strong><span class="delta" id="sDelta"></span></div>
       <div class="tiles" id="sTiles"></div>
       <section class="card">
@@ -373,7 +371,6 @@ input[type="time"]{flex:none;min-height:40px;padding:6px 10px;border:0;border-ra
         <button class="navbtn" type="button" id="cNext" aria-label="Следващ месец"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
       </div>
       <p class="cal-sub" id="cSub"></p>
-      <p class="demo" id="demoC" hidden><span class="pill">Пример</span>Измислени суми, докато нямаш свои записи.</p>
       <div class="cal-head" aria-hidden="true"><span>пн</span><span>вт</span><span>ср</span><span>чт</span><span>пт</span><span>сб</span><span>нд</span></div>
       <div class="cal-grid" id="calGrid"></div>
       <div class="legend" id="calLegend"></div>
@@ -837,7 +834,7 @@ var BTCore = (() => {
     tab: 'entry', selDate: C.workDate(), expr: '', delArmed: 0,
     period: { mode: 'month', anchor: C.monthStart(C.today()) },
     calAnchor: C.monthStart(C.today()), anchorsTouched: false,
-    demo: null, chartArgs: null, readoutIdx: -1,
+    chartArgs: null, readoutIdx: -1,
     importData: null, downloads: null, lastWorkDate: C.workDate()
   };
   const save = () => persist(S.data);
@@ -847,11 +844,9 @@ var BTCore = (() => {
     S.realCount = ks.length;
     S.first = ks.length ? ks[0] : null;
   }
-  const isDemo = () => S.realCount === 0;
-  function demoData() { if (!S.demo) S.demo = C.demoEntries(C.addDays(C.today(), -1)); return S.demo; }
   function syncAnchors() {
     if (S.anchorsTouched) return;
-    const ref = isDemo() ? C.addDays(C.today(), -1) : C.today();
+    const ref = C.today();
     S.period.anchor = C.normAnchor(S.period.mode, ref);
     S.calAnchor = C.monthStart(ref);
   }
@@ -995,9 +990,7 @@ var BTCore = (() => {
     syncAnchors();
     const P = S.period, t = C.today();
     for (const b of $('pSeg').querySelectorAll('button')) b.setAttribute('aria-pressed', String(b.dataset.mode === P.mode));
-    const demo = isDemo();
-    $('demoS').hidden = !demo;
-    const E = demo ? demoData() : S.entries;
+    const E = S.entries;
     const keys = Object.keys(E).sort();
     const first = keys.length ? keys[0] : null;
     const r = C.periodRange(P.mode, P.anchor, first, t);
@@ -1019,7 +1012,7 @@ var BTCore = (() => {
     $('sTotal').textContent = C.eur(st.total);
     const dl = $('sDelta'), tiles = $('sTiles');
     if (!st.count && !st.off) {
-      dl.textContent = 'Няма записи за този период.';
+      dl.textContent = S.realCount ? 'Няма записи за този период.' : 'Още нямаш записи. Запиши първия си бакшиш от „Запис“.';
       tiles.hidden = true;
     } else {
       dl.textContent = '';
@@ -1188,16 +1181,14 @@ var BTCore = (() => {
   /* ---------- calendar ---------- */
   function renderCal() {
     syncAnchors();
-    const demo = isDemo();
-    $('demoC').hidden = !demo;
-    const E = demo ? demoData() : S.entries;
+    const E = S.entries;
     const t = C.today(), wDate = C.workDate(), a = S.calAnchor, p = C.parts(a), nDays = C.dim(p.y, p.m);
     $('cTitle').textContent = C.monthTitle(a);
     const st = C.stats(E, a, C.monthEnd(a));
     $('cSub').textContent = st.count ? `Общо ${C.eur(st.total)} · ${C.workDaysWord(st.count)}` : 'Няма записи за този месец';
     $('cNext').disabled = C.addMonths(a, 1) > t;
     const sc = C.heatScale(Object.keys(E).filter(k => !E[k].off).map(k => E[k].cents));
-    const first = demo ? null : S.first;
+    const first = S.first;
     const work = S.data.settings.workDays;
     let h = '';
     for (let i = 0, lead = C.weekday(a); i < lead; i++) h += '<span class="cell blank" aria-hidden="true"></span>';
@@ -1216,7 +1207,7 @@ var BTCore = (() => {
     $('calGrid').innerHTML = h;
     let lg = '';
     if (sc) lg += `<span class="ramp"><span>${esc(C.eur(sc.min, 0))}</span><i class="h1"></i><i class="h2"></i><i class="h3"></i><i class="h4"></i><i class="h5"></i><span>${esc(C.eur(sc.max, 0))}</span></span>`;
-    if (work.length && !demo) lg += '<span class="lg"><i class="lg-missed"></i>липсва запис</span>';
+    if (work.length) lg += '<span class="lg"><i class="lg-missed"></i>липсва запис</span>';
     lg += '<span class="lg"><i class="lg-off">—</i>почивен ден</span>';
     $('calLegend').innerHTML = lg;
   }
