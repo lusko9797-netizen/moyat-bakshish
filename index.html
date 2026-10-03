@@ -31,7 +31,7 @@ img{max-width:100%}
   --bg:#F2F4F3; --surface:#FFFFFF; --key:#FFFFFF; --key-press:#E4E9E6; --fill:#E9EDEB;
   --text:#18201C; --text-2:#56615B; --text-3:#66716B; --line:#E1E6E3;
   --accent:#1E7650; --accent-text:#1A6B48; --on-accent:#FFFFFF; --accent-soft:#E2F0E8;
-  --bar:#4E9C76; --bar-best:#0F4F33;
+  --job-1:#449C76; --job-1-best:#0F4F33; --job-2:#EB6834; --job-2-best:#9C3A10; --job-3:#2A78D6; --job-3-best:#104281;
   --down:#B42318; --warn:#C2410C; --warn-soft:#FDF0E7;
   --heat-1:#88C09E; --heat-2:#5AA37C; --heat-3:#358460; --heat-4:#1D6547; --heat-5:#0F402C;
   --heat-ink-1:#18201C; --heat-ink-2:#18201C; --heat-ink-3:#FFFFFF; --heat-ink-4:#FFFFFF; --heat-ink-5:#FFFFFF;
@@ -44,7 +44,7 @@ img{max-width:100%}
     --bg:#0E1110; --surface:#181C1A; --key:#202523; --key-press:#2A302D; --fill:#232826;
     --text:#E9EEEB; --text-2:#A9B3AE; --text-3:#909A95; --line:#2A302D;
     --accent:#3DAE76; --accent-text:#5CCB93; --on-accent:#06110B; --accent-soft:#17301F;
-    --bar:#2E8A5D; --bar-best:#8BDDB2;
+    --job-1:#2E9467; --job-1-best:#8BDDB2; --job-2:#D95926; --job-2-best:#F5A784; --job-3:#3987E5; --job-3-best:#9EC5F4;
     --down:#F97066; --warn:#F2994A; --warn-soft:#2A1D12;
     --heat-1:#295D46; --heat-2:#2D7553; --heat-3:#3F9C6F; --heat-4:#6CC094; --heat-5:#A9E2C2;
     --heat-ink-1:#E9EEEB; --heat-ink-2:#E9EEEB; --heat-ink-3:#06110B; --heat-ink-4:#06110B; --heat-ink-5:#06110B;
@@ -57,7 +57,7 @@ img{max-width:100%}
   --bg:#0E1110; --surface:#181C1A; --key:#202523; --key-press:#2A302D; --fill:#232826;
   --text:#E9EEEB; --text-2:#A9B3AE; --text-3:#909A95; --line:#2A302D;
   --accent:#3DAE76; --accent-text:#5CCB93; --on-accent:#06110B; --accent-soft:#17301F;
-  --bar:#2E8A5D; --bar-best:#8BDDB2;
+  --job-1:#2E9467; --job-1-best:#8BDDB2; --job-2:#D95926; --job-2-best:#F5A784; --job-3:#3987E5; --job-3-best:#9EC5F4;
   --down:#F97066; --warn:#F2994A; --warn-soft:#2A1D12;
   --heat-1:#295D46; --heat-2:#2D7553; --heat-3:#3F9C6F; --heat-4:#6CC094; --heat-5:#A9E2C2;
   --heat-ink-1:#E9EEEB; --heat-ink-2:#E9EEEB; --heat-ink-3:#06110B; --heat-ink-4:#06110B; --heat-ink-5:#06110B;
@@ -69,7 +69,7 @@ img{max-width:100%}
   --bg:#F2F4F3; --surface:#FFFFFF; --key:#FFFFFF; --key-press:#E4E9E6; --fill:#E9EDEB;
   --text:#18201C; --text-2:#56615B; --text-3:#66716B; --line:#E1E6E3;
   --accent:#1E7650; --accent-text:#1A6B48; --on-accent:#FFFFFF; --accent-soft:#E2F0E8;
-  --bar:#4E9C76; --bar-best:#0F4F33;
+  --job-1:#449C76; --job-1-best:#0F4F33; --job-2:#EB6834; --job-2-best:#9C3A10; --job-3:#2A78D6; --job-3-best:#104281;
   --down:#B42318; --warn:#C2410C; --warn-soft:#FDF0E7;
   --heat-1:#88C09E; --heat-2:#5AA37C; --heat-3:#358460; --heat-4:#1D6547; --heat-5:#0F402C;
   --heat-ink-1:#18201C; --heat-ink-2:#18201C; --heat-ink-3:#FFFFFF; --heat-ink-4:#FFFFFF; --heat-ink-5:#FFFFFF;
@@ -183,8 +183,12 @@ h1,h2,h3{text-wrap:balance}
 .chart .empty{margin:22px 0;text-align:center;color:var(--text-3)}
 .ax{fill:var(--text-3);font-family:var(--font);font-size:11px;font-variant-numeric:tabular-nums}
 .gridl,.basel{stroke:var(--line);stroke-width:1}
-.bar{fill:var(--bar)}
-.bar.best{fill:var(--bar-best)}
+.bar{fill:var(--job-1)}
+.bar.best{fill:var(--job-1-best)}
+.bar.k2{fill:var(--job-2)}
+.bar.k3{fill:var(--job-3)}
+.bar.k2.best{fill:var(--job-2-best)}
+.bar.k3.best{fill:var(--job-3-best)}
 .bar.zero{fill:var(--text-3)}
 .bar.on{opacity:.7}
 .avgline{stroke:var(--text-2);stroke-width:1}
@@ -202,8 +206,8 @@ h1,h2,h3{text-wrap:balance}
 .wd{display:grid;grid-template-columns:2.2em minmax(0,1fr) auto;align-items:center;gap:8px 10px;margin-top:12px}
 .wd-name{font-size:14px;font-weight:600;color:var(--text-2)}
 .wd-track{position:relative;height:14px}
-.wd-bar{position:absolute;left:0;top:0;bottom:0;min-width:2px;border-radius:0 4px 4px 0;background:var(--bar)}
-.wd-bar.best{background:var(--bar-best)}
+.wd-bar{position:absolute;left:0;top:0;bottom:0;min-width:2px;border-radius:0 4px 4px 0;background:var(--job-1)}
+.wd-bar.best{background:var(--job-1-best)}
 .wd-val{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
 .wd-val small{margin-left:6px;font-size:12px;font-weight:500;color:var(--text-3)}
 .wd-none{grid-column:2 / -1;font-size:13px;color:var(--text-3)}
@@ -271,6 +275,43 @@ input[type="time"]{flex:none;min-height:40px;padding:6px 10px;border:0;border-ra
 .tab[aria-current="page"]{color:var(--accent-text)}
 .toast{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:30;max-width:calc(100% - 32px);padding:10px 16px;border-radius:12px;background:var(--text);color:var(--surface);font-size:15px;font-weight:600;text-align:center;opacity:0;pointer-events:none;transform:translate(-50%,10px);transition:opacity .2s,transform .2s}
 .toast.show{opacity:1;transform:translate(-50%,0)}
+/* workplaces */
+.dot{width:10px;height:10px;border-radius:50%;flex:none;display:inline-block}
+.k1{background:var(--job-1)}
+.k2{background:var(--job-2)}
+.k3{background:var(--job-3)}
+.wd-bar.k2.best{background:var(--job-2-best)}
+.wd-bar.k3.best{background:var(--job-3-best)}
+.wd-stack{position:absolute;left:0;top:0;bottom:0;display:flex;gap:2px;min-width:2px}
+.wd-stack > span{min-width:1px}
+.wd-stack > span:last-child{border-radius:0 4px 4px 0}
+.wd-stack > .z{background:var(--text-3)}
+.seg.places{margin-top:10px}
+.seg.places button{display:flex;align-items:center;justify-content:center;gap:6px;min-width:0;padding-inline:8px}
+.seg.places .pn{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.seg.places .ck{color:var(--accent-text);font-weight:700}
+.scope{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.scope-chip{display:inline-flex;align-items:center;gap:7px;max-width:100%;min-height:36px;padding:6px 13px;border:0;border-radius:999px;background:var(--fill);color:var(--text);font-size:15px;font-weight:600;cursor:pointer}
+.scope-chip span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.scope-chip[aria-pressed="true"]{background:var(--text);color:var(--surface)}
+.share{display:flex;gap:2px;height:10px;margin-top:12px;border-radius:5px;overflow:hidden}
+.share span{min-width:3px}
+.plist{margin-top:6px}
+.prow{width:100%;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:2px 10px;padding:10px 0;border:0;border-top:1px solid var(--line);background:none;color:var(--text);font:inherit;text-align:left;cursor:pointer}
+.prow:first-child{border-top:0}
+.prow .pname{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.prow .pval{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.prow .psub{grid-column:2 / -1;font-size:13px;color:var(--text-3)}
+.chart-legend{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:6px;font-size:13px;color:var(--text-2)}
+.chart-legend .lg{display:inline-flex;align-items:center;gap:6px;min-width:0}
+.chart-legend .sw{width:12px;height:10px;border-radius:2px;flex:none;display:inline-block}
+.readout .split{color:var(--text-2)}
+.row-btn .pl{display:flex;align-items:center;gap:6px;min-width:0;max-width:45%;color:var(--text-2);font-size:14px}
+.row-btn .pl span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.place-row{display:flex;align-items:center;gap:10px}
+.place-row input{flex:1;min-width:0;min-height:42px;padding:6px 10px;border:0;border-radius:10px;background:var(--fill);color:var(--text);font-size:16px;font-weight:600}
+.place-row .link{flex:none;padding-inline:6px}
+.place-item .warn-line{margin:6px 0 0 20px;color:var(--down)}
 @media (prefers-reduced-motion: reduce){
   .toast,.sw .knob,.sw .knob::after{transition:none}
 }
@@ -309,6 +350,7 @@ input[type="time"]{flex:none;min-height:40px;padding:6px 10px;border:0;border-ra
         <button class="navbtn" type="button" id="dNext" aria-label="Следващ ден"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
       </div>
       <p class="hint" id="nightHint" hidden>След полунощ записваме за смяната от предния ден.</p>
+      <div class="seg places" id="placeSeg" role="group" aria-label="Работно място" hidden></div>
 
       <div class="amountbox">
         <div class="amount is-empty" id="amount" aria-live="polite"><span id="amountNum">0</span><span class="cur">€</span></div>
@@ -351,6 +393,7 @@ input[type="time"]{flex:none;min-height:40px;padding:6px 10px;border:0;border-ra
 
     <!-- СТАТИСТИКА -->
     <section class="view" id="view-stats" aria-label="Статистика" hidden>
+      <div class="scope" id="scopeS" role="group" aria-label="Място" hidden></div>
       <div class="seg" id="pSeg" role="group" aria-label="Период">
         <button type="button" data-mode="week" aria-pressed="false">Седмица</button>
         <button type="button" data-mode="month" aria-pressed="true">Месец</button>
@@ -364,8 +407,14 @@ input[type="time"]{flex:none;min-height:40px;padding:6px 10px;border:0;border-ra
       </div>
       <div class="total"><span class="label">Общо</span><strong id="sTotal">0,00&nbsp;€</strong><span class="delta" id="sDelta"></span></div>
       <div class="tiles" id="sTiles"></div>
+      <section class="card" id="placesCard" hidden>
+        <h3>По места</h3>
+        <div class="share" id="shareBar" aria-hidden="true"></div>
+        <div class="plist" id="placeList"></div>
+      </section>
       <section class="card">
         <h3 id="chTitle">По дни</h3>
+        <div class="chart-legend" id="chLegend" hidden></div>
         <p class="readout" id="readout"></p>
         <div class="chart" id="chart"></div>
         <details class="tview"><summary>Покажи като таблица</summary><div class="tscroll" id="chTable"></div></details>
@@ -379,6 +428,7 @@ input[type="time"]{flex:none;min-height:40px;padding:6px 10px;border:0;border-ra
 
     <!-- КАЛЕНДАР -->
     <section class="view" id="view-calendar" aria-label="Календар" hidden>
+      <div class="scope" id="scopeC" role="group" aria-label="Място" hidden></div>
       <div class="periodnav">
         <button class="navbtn" type="button" id="cPrev" aria-label="Предишен месец"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
         <div class="ptitle"><h2 id="cTitle">&nbsp;</h2></div>
@@ -393,6 +443,10 @@ input[type="time"]{flex:none;min-height:40px;padding:6px 10px;border:0;border-ra
 
     <!-- НАСТРОЙКИ -->
     <section class="view" id="view-settings" aria-label="Настройки" hidden>
+      <h2 class="group-title">Работни места</h2>
+      <div class="group" id="placesGroup"></div>
+      <p class="foot" id="placesFoot" hidden>Дай имена на местата, напр. „Ресторант“ и „Бар“. Напомнянето е едно за всички места.</p>
+
       <h2 class="group-title">Напомняне</h2>
       <div class="group">
         <div class="item block"><span class="label">Работни дни</span><div class="daychips" id="dayChips" role="group" aria-label="Работни дни"></div></div>
@@ -708,25 +762,137 @@ var BTCore = (() => {
     return { max: Math.round(top * 100), step: Math.round(step * 100) };
   }
 
-  // Example data for the empty state. Never stored.
-  function demoEntries(endDate, days = 150) {
-    let seed = 20261;
-    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-    const base = [0, 30, 33, 37, 54, 66, 46];
-    const out = {};
-    for (let i = days - 1; i >= 0; i--) {
-      const d = addDays(endDate, -i), w = weekday(d);
-      if (w === 0) continue;
-      if (rnd() < 0.06) { out[d] = { off: true }; continue; }
-      out[d] = { cents: Math.round(base[w] * (0.7 + rnd() * 0.65) * 2) * 50 };
+  /* ---------- workplaces ----------
+     A day is { off: true } (no work anywhere) or { by: { placeId: cents } }.
+     Records from before workplaces existed ({ cents }) belong to the first place. */
+  const MAX_PLACES = 3;
+  const PLACE_ID_RE = /^[a-z0-9]{1,12}$/;
+  const okCents = c => Number.isFinite(c) && c >= 0 && c <= 99999999;
+  function cleanName(s) {
+    if (typeof s !== 'string') return '';
+    return s.replace(/[\u0000-\u001f\u007f\u200b-\u200f\u2028-\u202e\u2066-\u2069]/g, '').replace(/\s+/g, ' ').trim().slice(0, 24);
+  }
+  function freeColor(places) {
+    for (let k = 1; k <= MAX_PLACES; k++) if (!places.some(p => p.c === k)) return k;
+    return 1;
+  }
+  // Every place keeps its own colour for good, so removing one never repaints the others.
+  function sanitizePlaces(arr) {
+    const out = [];
+    if (Array.isArray(arr)) for (const p of arr) {
+      if (out.length >= MAX_PLACES) break;
+      if (!p || typeof p.id !== 'string' || !PLACE_ID_RE.test(p.id) || out.some(x => x.id === p.id)) continue;
+      out.push({ id: p.id, name: cleanName(p.name), c: Number.isInteger(p.c) && p.c >= 1 && p.c <= MAX_PLACES ? p.c : 0 });
+    }
+    const seen = new Set();
+    for (const p of out) { if (!p.c || seen.has(p.c)) p.c = 0; else seen.add(p.c); }
+    for (const p of out) if (!p.c) p.c = freeColor(out);
+    if (!out.length) out.push({ id: 'main', name: '', c: 1 });
+    return out;
+  }
+  // A place named in the records but missing from the list comes back, so no amount is ever dropped.
+  function reconcilePlaces(places, entries) {
+    const out = places.slice();
+    if (entries && typeof entries === 'object') for (const d in entries) {
+      const by = entries[d] && entries[d].by;
+      if (!by || typeof by !== 'object') continue;
+      for (const id in by) if (PLACE_ID_RE.test(id) && okCents(by[id]) && !out.some(p => p.id === id) && out.length < MAX_PLACES) out.push({ id, name: '', c: freeColor(out) });
     }
     return out;
+  }
+  function newPlaceId(places, rnd = Math.random) {
+    for (let i = 0; i < 50; i++) {
+      const id = 'p' + Math.floor(rnd() * 2176782336).toString(36);
+      if (PLACE_ID_RE.test(id) && !places.some(p => p.id === id)) return id;
+    }
+    return 'p' + Date.now().toString(36).slice(-8);
+  }
+  function normalizeDay(v, ids, defId) {
+    if (!v || typeof v !== 'object') return null;
+    if (v.off === true) return { off: true };
+    const by = {};
+    let any = false;
+    if (v.by && typeof v.by === 'object') {
+      for (const id of ids) if (okCents(v.by[id])) { by[id] = Math.round(v.by[id]); any = true; }
+    } else if (defId && okCents(v.cents)) { by[defId] = Math.round(v.cents); any = true; }
+    return any ? { by } : null;
+  }
+  function dayCents(rec, scope) {
+    if (!rec || rec.off || !rec.by) return null;
+    if (scope !== 'all') return okCents(rec.by[scope]) ? rec.by[scope] : null;
+    let s = 0, any = false;
+    for (const k in rec.by) if (okCents(rec.by[k])) { s += rec.by[k]; any = true; }
+    return any ? s : null;
+  }
+  // One place, or all places added up, in the plain { cents } / { off } form the statistics use.
+  function flatten(entries, scope) {
+    const out = {};
+    for (const d in entries) {
+      const r = entries[d];
+      if (!r) continue;
+      if (r.off) { out[d] = { off: true }; continue; }
+      const c = dayCents(r, scope);
+      if (c != null) out[d] = { cents: c };
+    }
+    return out;
+  }
+  // The series for all places together, with every place's part of each bar.
+  function splitSeries(entries, ids, unit, a, b) {
+    const make = E => unit === 'day' ? daySeries(E, a, b) : unit === 'month' ? monthSeries(E, a, b) : yearSeries(E, a, b);
+    const per = ids.map(id => make(flatten(entries, id)));
+    return make(flatten(entries, 'all')).map((s, i) => Object.assign({}, s, { parts: per.map(p => p[i].cents) }));
+  }
+  // Average per working day (any place) for each weekday, split by place.
+  function weekdaySplit(entries, ids, start, end) {
+    const cnt = [0, 0, 0, 0, 0, 0, 0], sums = ids.map(() => [0, 0, 0, 0, 0, 0, 0]);
+    for (const d in entries) {
+      if (d < start || d > end) continue;
+      const r = entries[d];
+      if (!r || r.off || !r.by) continue;
+      const w = weekday(d);
+      let any = false;
+      ids.forEach((id, j) => { if (okCents(r.by[id])) { sums[j][w] += r.by[id]; any = true; } });
+      if (any) cnt[w]++;
+    }
+    return cnt.map((n, w) => {
+      if (!n) return { wd: w, count: 0, avg: null, parts: null };
+      const total = sums.reduce((a, s) => a + s[w], 0);
+      return { wd: w, count: n, avg: Math.round(total / n), parts: sums.map(s => Math.round(s[w] / n)) };
+    });
+  }
+  function placeStats(entries, ids, start, end) {
+    return ids.map(id => Object.assign({ id }, stats(flatten(entries, id), start, end)));
+  }
+  // Adds days from a backup to the ones on this phone. map turns a backup place id ('' = none) into a local one.
+  function mergeDays(local, incoming, map) {
+    const out = Object.assign({}, local);
+    let over = 0, n = 0;
+    for (const d of Object.keys(incoming).sort()) {
+      const r = incoming[d];
+      if (!r) continue;
+      if (r.off) { if (out[d]) over++; out[d] = { off: true }; n++; continue; }
+      const cur = out[d];
+      const by = cur && !cur.off ? Object.assign({}, cur.by) : {};
+      const setNow = {};
+      let any = false;
+      for (const pid in r.by) {
+        const lid = map[pid] || map[''];
+        if (!lid || !okCents(r.by[pid])) continue;
+        if (setNow[lid]) by[lid] += r.by[pid];
+        else { if (by[lid] != null) over++; by[lid] = r.by[pid]; setNow[lid] = true; }
+        n++; any = true;
+      }
+      if (!any) continue;
+      if (cur && cur.off) over++;
+      out[d] = { by };
+    }
+    return { entries: out, over, n };
   }
 
   function sanitizeEntry(v) {
     if (!v || typeof v !== 'object') return null;
     if (v.off === true) return { off: true };
-    if (Number.isFinite(v.cents) && v.cents >= 0 && v.cents <= 99999999) return { cents: Math.round(v.cents) };
+    if (okCents(v.cents)) return { cents: Math.round(v.cents) };
     return null;
   }
   function sanitizeSettings(v) {
@@ -738,35 +904,51 @@ var BTCore = (() => {
     if (typeof v.mornTime === 'string' && TIME_RE.test(v.mornTime)) o.mornTime = v.mornTime;
     return o;
   }
-  function buildBackup(entries, settings, nowIso) {
+  // Backup format 2: one row per place and day, plus the places with their names.
+  function buildBackup(entries, settings, nowIso, places) {
+    const rows = [];
+    for (const d of Object.keys(entries).sort()) {
+      const r = entries[d];
+      if (r.off) { rows.push({ date: d, off: true }); continue; }
+      for (const p of places) if (r.by && okCents(r.by[p.id])) rows.push({ date: d, place: p.id, eur: r.by[p.id] / 100 });
+    }
     return {
-      app: 'Бакшиш тефтер', format: 1, exportedAt: nowIso, currency: 'EUR', settings,
-      entries: Object.keys(entries).sort().map(d => entries[d].off ? { date: d, off: true } : { date: d, eur: entries[d].cents / 100 })
+      app: 'Моят бакшиш', format: 2, exportedAt: nowIso, currency: 'EUR',
+      places: places.map(p => ({ id: p.id, name: p.name, c: p.c })), settings, entries: rows
     };
   }
+  // Reads format 2 and the older format 1 (rows without a place, which go to the first place here).
   function parseBackup(obj) {
     const list = Array.isArray(obj) ? obj : obj && Array.isArray(obj.entries) ? obj.entries : null;
     if (!list) return null;
+    const places = !Array.isArray(obj) && Array.isArray(obj.places) && obj.places.length ? sanitizePlaces(obj.places) : [];
+    const ids = places.map(p => p.id);
     const entries = {};
+    let rows = 0;
     for (const it of list) {
       if (!it || typeof it.date !== 'string' || !DATE_RE.test(it.date)) continue;
-      if (it.off === true) { entries[it.date] = { off: true }; continue; }
+      if (it.off === true) { entries[it.date] = { off: true }; rows++; continue; }
       let c = null;
       if (Number.isFinite(it.cents)) c = Math.round(it.cents);
       else if (Number.isFinite(it.eur)) c = Math.round(it.eur * 100);
       else if (typeof it.eur === 'string' && /^\d+(?:[.,]\d{1,2})?$/.test(it.eur.trim())) c = Math.round(parseFloat(it.eur.trim().replace(',', '.')) * 100);
-      if (c === null || c < 0 || c > 99999999) continue;
-      entries[it.date] = { cents: c };
+      if (c === null || !okCents(c)) continue;
+      const pid = typeof it.place === 'string' && ids.includes(it.place) ? it.place : '';
+      const cur = entries[it.date] && !entries[it.date].off ? entries[it.date] : { by: {} };
+      cur.by[pid] = c;
+      entries[it.date] = cur;
+      rows++;
     }
-    return { entries, settings: !Array.isArray(obj) && obj.settings ? sanitizeSettings(obj.settings) : null };
+    return { places, entries, rows, settings: !Array.isArray(obj) && obj.settings ? sanitizeSettings(obj.settings) : null };
   }
 
   return {
-    MONTHS, MONTHS_ABBR, MONTHS_AX, WD, WD_S, DATE_RE, TIME_RE, NB,
+    MONTHS, MONTHS_ABBR, MONTHS_AX, WD, WD_S, DATE_RE, TIME_RE, NB, MAX_PLACES, PLACE_ID_RE,
     pad, ymd, parts, addDays, diffDays, weekday, today, workDate, weekStart, monthStart, monthEnd, dim, addMonths, monthsBetween, cap,
     periodRange, normAnchor, shiftAnchor, compareRanges, stats, daySeries, monthSeries, yearSeries, weekdayStats, missedDays,
     exprCents, pressKey, fmtMoney, eur, fmtTyped, compactEur, dateLong, dateShort, monthTitle, weekTitle, listBg, daysText, workDaysWord,
-    shiftDays, reminderPlan, gcalUrl, heatScale, heatLevel, niceMax, demoEntries, sanitizeEntry, sanitizeSettings, buildBackup, parseBackup
+    shiftDays, reminderPlan, gcalUrl, heatScale, heatLevel, niceMax, sanitizeEntry, sanitizeSettings, buildBackup, parseBackup,
+    cleanName, freeColor, sanitizePlaces, reconcilePlaces, newPlaceId, normalizeDay, dayCents, flatten, splitSeries, weekdaySplit, placeStats, mergeDays
   };
 })();
 </script>
@@ -780,7 +962,8 @@ var BTCore = (() => {
   const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   const isInstalled = () => { try { return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true; } catch (e) { return false; } };
   let installPrompt = null;
-  const KEY = 'mb1:data';
+  // Records live under KEY. The version before workplaces used OLD_KEY: it is read once and left untouched.
+  const KEY = 'mb2:data', OLD_KEY = 'mb1:data';
   const $ = id => document.getElementById(id);
   const esc = s => String(s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
   const parseJSON = s => { if (s == null) return null; try { return JSON.parse(s); } catch (e) { return undefined; } };
@@ -790,18 +973,22 @@ var BTCore = (() => {
   let storageOk = true;
   function readKey(k) { try { return localStorage.getItem(k); } catch (e) { storageOk = false; return null; } }
   function writeKey(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } }
-  function cleanMap(o) {
-    const out = {};
-    if (o && typeof o === 'object') for (const d in o) { if (!C.DATE_RE.test(d)) continue; const e = C.sanitizeEntry(o[d]); if (e) out[d] = e; }
-    return out;
-  }
   function blank() {
-    return { v: 1, entries: {}, settings: C.sanitizeSettings(null), theme: 'auto', lastBackup: null, nudgeHidden: false, installHidden: false, backupSnooze: null };
+    return { v: 2, places: C.sanitizePlaces(null), lastPlace: 'main', entries: {}, settings: C.sanitizeSettings(null), theme: 'auto', lastBackup: null, nudgeHidden: false, installHidden: false, backupSnooze: null };
   }
+  // Takes this version's data and every older shape; days saved as { cents } go to the first place.
   function cleanData(o) {
     const d = blank();
     if (!o || typeof o !== 'object') return d;
-    d.entries = cleanMap(o.entries);
+    const raw = o.entries && typeof o.entries === 'object' ? o.entries : {};
+    d.places = C.reconcilePlaces(C.sanitizePlaces(o.places), raw);
+    const ids = d.places.map(p => p.id);
+    for (const k in raw) {
+      if (!C.DATE_RE.test(k)) continue;
+      const r = C.normalizeDay(raw[k], ids, ids[0]);
+      if (r) d.entries[k] = r;
+    }
+    d.lastPlace = typeof o.lastPlace === 'string' && ids.includes(o.lastPlace) ? o.lastPlace : ids[0];
     d.settings = C.sanitizeSettings(o.settings);
     if (THEMES.includes(o.theme)) d.theme = o.theme;
     if (typeof o.lastBackup === 'string' && !isNaN(Date.parse(o.lastBackup))) d.lastBackup = o.lastBackup;
@@ -810,23 +997,18 @@ var BTCore = (() => {
     if (typeof o.backupSnooze === 'string' && C.DATE_RE.test(o.backupSnooze)) d.backupSnooze = o.backupSnooze;
     return d;
   }
-  // The first version kept its copy under bt1:* keys. Carry it over once.
+  // The very first version (inside Claude) kept its copy under bt1:* keys.
   function fromFirstVersion() {
     const cache = parseJSON(readKey('bt1:cache')), pending = parseJSON(readKey('bt1:pending'));
     if (!cache && !pending) return null;
-    const d = blank();
-    d.entries = cleanMap(cache && cache.entries);
+    const entries = Object.assign({}, cache && cache.entries && typeof cache.entries === 'object' ? cache.entries : {});
     if (pending && typeof pending === 'object') for (const k in pending) {
       if (!C.DATE_RE.test(k)) continue;
       const p = pending[k];
-      if (p && p.op === 'del') delete d.entries[k];
-      else if (p && p.op === 'set') { const v = C.sanitizeEntry(p.v); if (v) d.entries[k] = v; }
+      if (p && p.op === 'del') delete entries[k];
+      else if (p && p.op === 'set' && p.v) entries[k] = p.v;
     }
-    d.settings = C.sanitizeSettings(cache && cache.settings);
-    const th = parseJSON(readKey('bt1:theme'));
-    if (THEMES.includes(th)) d.theme = th;
-    d.nudgeHidden = parseJSON(readKey('bt1:nudge')) === true;
-    return d;
+    return { entries, settings: cache && cache.settings, theme: parseJSON(readKey('bt1:theme')), nudgeHidden: parseJSON(readKey('bt1:nudge')) === true };
   }
   function persist(d) {
     const ok = writeKey(KEY, JSON.stringify(d));
@@ -836,9 +1018,10 @@ var BTCore = (() => {
   }
   function load() {
     const raw = readKey(KEY), parsed = parseJSON(raw);
-    if (raw != null && parsed === undefined) writeKey('mb1:damaged-' + Date.now(), raw); // keep a damaged copy, never overwrite it silently
+    if (raw != null && parsed === undefined) writeKey(KEY + ':damaged-' + Date.now(), raw); // keep a damaged copy, never overwrite it silently
     if (parsed && typeof parsed === 'object') return cleanData(parsed);
-    const d = fromFirstVersion() || blank();
+    const old = parseJSON(readKey(OLD_KEY));
+    const d = cleanData(old && typeof old === 'object' ? old : fromFirstVersion());
     persist(d);
     return d;
   }
@@ -846,6 +1029,7 @@ var BTCore = (() => {
   const S = {
     data: blank(), entries: {}, realCount: 0, first: null,
     tab: 'entry', selDate: C.workDate(), expr: '', delArmed: 0, editMode: false, freshEdit: false,
+    place: null, scope: 'all', placeArm: null,
     period: { mode: 'month', anchor: C.monthStart(C.today()) },
     calAnchor: C.monthStart(C.today()), anchorsTouched: false,
     chartArgs: null, readoutIdx: -1,
@@ -864,9 +1048,97 @@ var BTCore = (() => {
     S.period.anchor = C.normAnchor(S.period.mode, ref);
     S.calAnchor = C.monthStart(ref);
   }
-  function putEntry(d, v) {
-    if (v) S.data.entries[d] = v; else delete S.data.entries[d];
+
+  /* ---------- workplaces ---------- */
+  const multi = () => S.data.places.length > 1;
+  const placeById = id => S.data.places.find(p => p.id === id) || null;
+  function placeName(p) { return p.name || `Място ${S.data.places.indexOf(p) + 1}`; }
+  function curPlace() {
+    const P = S.data.places;
+    if (!P.some(p => p.id === S.place)) S.place = P.some(p => p.id === S.data.lastPlace) ? S.data.lastPlace : P[0].id;
+    return S.place;
+  }
+  function setPlace(id) {
+    if (!placeById(id)) return;
+    S.place = id;
+    if (S.data.lastPlace !== id) { S.data.lastPlace = id; save(); }
+  }
+  function amountFor(d, pid) {
+    const r = S.entries[d];
+    return r && !r.off && r.by && r.by[pid] != null ? r.by[pid] : null;
+  }
+  function putAmount(d, pid, cents) {
+    const r = S.data.entries[d];
+    const by = r && !r.off ? Object.assign({}, r.by) : {};
+    by[pid] = cents;
+    S.data.entries[d] = { by };
     save(); recompute();
+  }
+  function putOff(d) { S.data.entries[d] = { off: true }; save(); recompute(); }
+  function removeRecord(d, pid) {
+    const r = S.data.entries[d];
+    if (!r) return;
+    if (r.off) delete S.data.entries[d];
+    else {
+      const by = Object.assign({}, r.by);
+      delete by[pid];
+      if (Object.keys(by).length) S.data.entries[d] = { by }; else delete S.data.entries[d];
+    }
+    save(); recompute();
+  }
+  function placeRecords(id) {
+    let n = 0;
+    for (const d in S.data.entries) { const r = S.data.entries[d]; if (r.by && r.by[id] != null) n++; }
+    return n;
+  }
+  function addPlace() {
+    const P = S.data.places;
+    if (P.length >= C.MAX_PLACES) return;
+    P.push({ id: C.newPlaceId(P), name: '', c: C.freeColor(P) });
+    save(); renderSettings();
+    const unnamed = P.find(p => !p.name);
+    const inp = unnamed && $('placeName-' + unnamed.id);
+    if (inp) { try { inp.focus(); } catch (e) { /* ignore */ } }
+  }
+  function removePlace(id) {
+    const p = placeById(id);
+    if (!p || !multi()) return;
+    const name = placeName(p);
+    for (const d of Object.keys(S.data.entries)) {
+      const r = S.data.entries[d];
+      if (!r.by || r.by[id] == null) continue;
+      const by = Object.assign({}, r.by);
+      delete by[id];
+      if (Object.keys(by).length) S.data.entries[d] = { by }; else delete S.data.entries[d];
+    }
+    S.data.places = S.data.places.filter(x => x.id !== id);
+    if (S.data.lastPlace === id) S.data.lastPlace = S.data.places[0].id;
+    if (S.place === id) S.place = null;
+    if (S.scope === id) S.scope = 'all';
+    S.placeArm = null;
+    save(); recompute();
+    toast(`„${name}“ е махнато.`);
+    renderSettings();
+  }
+  function scope() {
+    if (!multi()) return 'all';
+    if (S.scope !== 'all' && !placeById(S.scope)) S.scope = 'all';
+    return S.scope;
+  }
+  function setScope(id) {
+    S.scope = id === 'all' || placeById(id) ? id : 'all';
+    S.readoutIdx = -1;
+    render();
+  }
+  // Chips that switch the statistics and the calendar between all places and one place.
+  function renderScope(rowId) {
+    const row = $(rowId);
+    row.hidden = !multi();
+    if (row.hidden) { row.innerHTML = ''; return; }
+    const sc = scope();
+    let h = `<button type="button" class="scope-chip" data-scope="all" aria-pressed="${sc === 'all'}">Общо</button>`;
+    for (const p of S.data.places) h += `<button type="button" class="scope-chip" data-scope="${p.id}" aria-pressed="${sc === p.id}"><i class="dot k${p.c}" aria-hidden="true"></i><span>${esc(placeName(p))}</span></button>`;
+    row.innerHTML = h;
   }
 
   /* ---------- UI helpers ---------- */
@@ -907,32 +1179,53 @@ var BTCore = (() => {
   }
 
   /* ---------- entry ---------- */
+  function renderPlaceSeg() {
+    const seg = $('placeSeg');
+    seg.hidden = !multi();
+    if (seg.hidden) { seg.innerHTML = ''; return; }
+    const pid = curPlace(), rec = S.entries[S.selDate];
+    let h = '';
+    for (const p of S.data.places) {
+      const has = !!(rec && rec.by && rec.by[p.id] != null);
+      h += `<button type="button" data-place="${p.id}" aria-pressed="${p.id === pid}" aria-label="${esc(placeName(p) + (has ? ', записано' : ''))}"><i class="dot k${p.c}" aria-hidden="true"></i><span class="pn">${esc(placeName(p))}</span>${has ? '<span class="ck" aria-hidden="true">✓</span>' : ''}</button>`;
+    }
+    seg.innerHTML = h;
+  }
   function renderEntry() {
-    const t = C.today(), d = S.selDate, e = S.entries[d];
+    const t = C.today(), d = S.selDate, rec = S.entries[d];
     const diff = C.diffDays(d, t);
     $('dRel').textContent = diff === 0 ? 'Днес' : diff === 1 ? 'Вчера' : `Преди ${diff} дни`;
     $('dFull').textContent = C.dateLong(d, C.parts(d).y !== C.parts(t).y);
     $('dNext').disabled = d >= t;
     $('nightHint').hidden = !(new Date().getHours() < 5 && d === C.workDate());
+    renderPlaceSeg();
 
+    const many = multi(), pid = curPlace();
+    const off = !!(rec && rec.off);
+    const mine = amountFor(d, pid);
+    const e = off ? { off: true } : mine != null ? { cents: mine } : null; // what is saved for this place on this day
+    const others = many && rec && !off ? S.data.places.filter(p => p.id !== pid && rec.by[p.id] != null) : [];
     const typed = S.expr !== '';
     const cents = C.exprCents(S.expr);
     const terms = S.expr.split('+').filter(Boolean);
     let num = '0', cls = 'amount is-empty', sub = 'Въведи сумата', subOk = false;
     if (typed) {
-      const multi = S.expr.includes('+');
-      num = multi ? C.fmtMoney(cents == null ? 0 : cents) : C.fmtTyped(S.expr);
+      const sum = S.expr.includes('+');
+      num = sum ? C.fmtMoney(cents == null ? 0 : cents) : C.fmtTyped(S.expr);
       cls = 'amount';
-      const parts = [];
-      if (multi) parts.push(terms.map(C.fmtTyped).join(' + ') + (S.expr.endsWith('+') ? ' + …' : ' ='));
+      const bits = [];
+      if (sum) bits.push(terms.map(C.fmtTyped).join(' + ') + (S.expr.endsWith('+') ? ' + …' : ' ='));
       if (e) {
-        if (e.off) parts.push('вместо почивен ден');
-        else if (S.editMode) parts.push(S.freshEdit ? 'Въведи новата сума или добави с +' : `беше ${C.eur(e.cents)}`);
-        else parts.push(`вместо ${C.eur(e.cents)}`);
+        if (e.off) bits.push('вместо почивен ден');
+        else if (S.editMode) bits.push(S.freshEdit ? 'Въведи новата сума или добави с +' : `беше ${C.eur(e.cents)}`);
+        else bits.push(`вместо ${C.eur(e.cents)}`);
       }
-      sub = parts.join(' · ');
-    } else if (e && e.off) { num = 'Почивен ден'; cls = 'amount is-word'; sub = ''; }
-    else if (e) { num = C.fmtMoney(e.cents); cls = 'amount'; sub = '✓ Записано'; subOk = true; }
+      sub = bits.join(' · ');
+    } else if (off) { num = 'Почивен ден'; cls = 'amount is-word'; sub = ''; }
+    else if (e) {
+      num = C.fmtMoney(e.cents); cls = 'amount'; subOk = true;
+      sub = '✓ Записано' + (others.length ? ` · общо за деня ${C.eur(C.dayCents(rec, 'all'))}` : '');
+    } else if (others.length) sub = 'Въведи сумата · ' + others.map(p => `${placeName(p)}: ${C.eur(rec.by[p.id])}`).join(' · ');
     $('amount').className = cls;
     $('amountNum').textContent = num;
     const subEl = $('amountSub');
@@ -943,7 +1236,7 @@ var BTCore = (() => {
     const canEdit = !!e && !e.off && !typed;
     saveBtn.disabled = canEdit ? false : cents == null;
     saveBtn.textContent = canEdit ? 'Промени' : e ? (S.editMode ? 'Запази' : 'Замени') : 'Запиши';
-    $('offBtn').hidden = !!e || typed;
+    $('offBtn').hidden = !!rec || typed;
     const clr = $('clearBtn');
     clr.hidden = !typed;
     clr.textContent = S.editMode ? 'Откажи' : 'Изчисти';
@@ -976,23 +1269,33 @@ var BTCore = (() => {
     }
     $('nudge').hidden = due || canInstall || S.data.settings.workDays.length > 0 || S.data.nudgeHidden;
 
-    const ws = C.weekStart(t), w = C.stats(S.entries, ws, C.addDays(ws, 6));
-    const m = C.stats(S.entries, C.monthStart(t), C.monthEnd(t));
+    // this week and this month, all places together
+    const all = C.flatten(S.entries, 'all');
+    const ws = C.weekStart(t), w = C.stats(all, ws, C.addDays(ws, 6));
+    const m = C.stats(all, C.monthStart(t), C.monthEnd(t));
     $('miniW').textContent = C.eur(w.total);
     $('miniWn').textContent = w.count ? C.workDaysWord(w.count) : 'няма записи';
     $('miniMl').textContent = C.cap(C.MONTHS[C.parts(t).m - 1]);
     $('miniM').textContent = C.eur(m.total);
     $('miniMn').textContent = m.count ? C.workDaysWord(m.count) : 'няма записи';
 
-    // the last few days, each one tap away from editing
-    const recent = Object.keys(S.entries).sort().reverse().slice(0, 5);
-    $('recent').hidden = !recent.length;
+    // the last few records, each one tap away from editing
+    const rows = [];
+    for (const k of Object.keys(S.entries).sort().reverse()) {
+      const r = S.entries[k];
+      if (r.off) rows.push({ d: k });
+      else for (const p of S.data.places) if (r.by[p.id] != null) rows.push({ d: k, p, c: r.by[p.id] });
+      if (rows.length >= 5) break;
+    }
+    rows.splice(5);
+    $('recent').hidden = !rows.length;
     let rh = '';
-    for (const k of recent) {
-      const v = S.entries[k];
-      const val = v.off ? '<span class="v off">почивен ден</span>' : `<span class="v">${esc(C.eur(v.cents))}</span>`;
-      const label = 'Промени ' + C.dateLong(k) + (v.off ? ', почивен ден' : ', ' + C.eur(v.cents));
-      rh += `<button type="button" class="row-btn" data-date="${k}" aria-label="${esc(label)}"><span class="d">${esc(C.dateShort(k, C.parts(k).y !== C.parts(t).y))}</span>${val}${PENCIL}</button>`;
+    for (const row of rows) {
+      const k = row.d;
+      const val = row.p ? `<span class="v">${esc(C.eur(row.c))}</span>` : '<span class="v off">почивен ден</span>';
+      const pl = row.p && many ? `<span class="pl"><i class="dot k${row.p.c}" aria-hidden="true"></i><span>${esc(placeName(row.p))}</span></span>` : '';
+      const label = 'Промени ' + C.dateLong(k) + (row.p ? (many ? ', ' + placeName(row.p) : '') + ', ' + C.eur(row.c) : ', почивен ден');
+      rh += `<button type="button" class="row-btn" data-date="${k}"${row.p ? ` data-place="${row.p.id}"` : ''} aria-label="${esc(label)}"><span class="d">${esc(C.dateShort(k, C.parts(k).y !== C.parts(t).y))}</span>${pl}${val}${PENCIL}</button>`;
     }
     $('recentList').innerHTML = rh;
   }
@@ -1001,9 +1304,9 @@ var BTCore = (() => {
   // Editing puts the saved amount on the display: a digit starts a new amount,
   // ⌫ changes the last digits, + adds to it.
   function startEdit() {
-    const e = S.entries[S.selDate];
-    if (!e || e.off) return;
-    S.expr = centsToExpr(e.cents); S.editMode = true; S.freshEdit = true; S.delArmed = 0;
+    const c = amountFor(S.selDate, curPlace());
+    if (c == null) return;
+    S.expr = centsToExpr(c); S.editMode = true; S.freshEdit = true; S.delArmed = 0;
     renderEntry();
   }
   function cancelEdit() { S.expr = ''; S.editMode = false; S.freshEdit = false; renderEntry(); }
@@ -1020,10 +1323,11 @@ var BTCore = (() => {
   function saveTyped() {
     const c = C.exprCents(S.expr);
     if (c == null) return;
-    const d = S.selDate, had = S.entries[d];
-    putEntry(d, { cents: c });
+    const d = S.selDate, pid = curPlace(), had = amountFor(d, pid);
+    putAmount(d, pid, c);
     S.expr = ''; S.editMode = false; S.freshEdit = false;
-    toast(had && !had.off ? `Променено: ${C.eur(c)} за ${C.dateShort(d)}` : `Записано: ${C.eur(c)} за ${C.dateShort(d)}`);
+    const where = multi() ? placeName(placeById(pid)) + ', ' : '';
+    toast(`${had != null ? 'Променено' : 'Записано'}: ${C.eur(c)} за ${where}${C.dateShort(d)}`);
     render();
   }
 
@@ -1042,9 +1346,14 @@ var BTCore = (() => {
   }
   function renderStats() {
     syncAnchors();
-    const P = S.period, t = C.today();
+    renderScope('scopeS');
+    const P = S.period, t = C.today(), sc = scope(), many = multi();
+    const stacked = many && sc === 'all';
+    const place = sc !== 'all' ? placeById(sc) : many ? null : S.data.places[0];
+    const k = place ? place.c : 1; // bar colour when one place is shown
+    const ids = S.data.places.map(p => p.id);
     for (const b of $('pSeg').querySelectorAll('button')) b.setAttribute('aria-pressed', String(b.dataset.mode === P.mode));
-    const E = S.entries;
+    const E = C.flatten(S.entries, sc);
     const keys = Object.keys(E).sort();
     const first = keys.length ? keys[0] : null;
     const r = C.periodRange(P.mode, P.anchor, first, t);
@@ -1066,7 +1375,8 @@ var BTCore = (() => {
     $('sTotal').textContent = C.eur(st.total);
     const dl = $('sDelta'), tiles = $('sTiles');
     if (!st.count && !st.off) {
-      dl.textContent = S.realCount ? 'Няма записи за този период.' : 'Още нямаш записи. Запиши първия си бакшиш от „Запис“.';
+      dl.textContent = !S.realCount ? 'Още нямаш записи. Запиши първия си бакшиш от „Запис“.'
+        : place && many ? `Няма записи за ${placeName(place)} в този период.` : 'Няма записи за този период.';
       tiles.hidden = true;
     } else {
       dl.textContent = '';
@@ -1083,47 +1393,78 @@ var BTCore = (() => {
       let h = tile('Работни дни', String(st.count));
       h += tile('Средно на ден', st.count ? C.eur(st.avg) : '—');
       h += tile('Най-добър ден', st.best ? C.eur(st.best.cents) : '—', st.best ? C.dateShort(st.best.date, C.parts(st.best.date).y !== C.parts(t).y) : '');
-      let fourth = tile('Почивни дни', String(st.off));
-      if (P.mode === 'year' || P.mode === 'all') {
-        const ms = C.monthSeries(E, C.monthStart(r.start), C.monthStart(r.end)).filter(x => x.cents != null);
-        if (ms.length > 1) {
-          const bm = ms.reduce((a, b) => b.cents > a.cents ? b : a), bp = C.parts(bm.key);
-          fourth = tile('Най-добър месец', C.eur(bm.cents), `${C.MONTHS[bp.m - 1]} ${bp.y}`);
+      let fourth;
+      if (sc !== 'all') {
+        const all = C.stats(C.flatten(S.entries, 'all'), r.start, r.end).total;
+        fourth = tile('Дял от общото', all > 0 ? `${Math.round(st.total / all * 100)}%` : '—', all > 0 ? `от ${C.eur(all)}` : '');
+      } else {
+        fourth = tile('Почивни дни', String(st.off));
+        if (P.mode === 'year' || P.mode === 'all') {
+          const ms = C.monthSeries(E, C.monthStart(r.start), C.monthStart(r.end)).filter(x => x.cents != null);
+          if (ms.length > 1) {
+            const bm = ms.reduce((a, b) => b.cents > a.cents ? b : a), bp = C.parts(bm.key);
+            fourth = tile('Най-добър месец', C.eur(bm.cents), `${C.MONTHS[bp.m - 1]} ${bp.y}`);
+          }
         }
       }
       tiles.innerHTML = h + fourth;
       tiles.hidden = false;
     }
 
+    // every place next to the others: share of the total, days, average
+    const pc = $('placesCard');
+    pc.hidden = !stacked || !st.count;
+    if (!pc.hidden) {
+      const ps = C.placeStats(S.entries, ids, r.start, r.end);
+      const tot = ps.reduce((a, x) => a + x.total, 0);
+      let bar = '', rowsH = '';
+      ps.forEach((x, j) => {
+        const p = S.data.places[j];
+        if (x.total > 0) bar += `<span class="k${p.c}" style="flex:${x.total} 1 0px"></span>`;
+        const pct = tot > 0 ? `${Math.round(x.total / tot * 100)}%` : '—';
+        const line = x.count ? `${pct} · ${C.workDaysWord(x.count)} · средно ${C.eur(x.avg, 0)}` : 'няма записи за периода';
+        rowsH += `<button type="button" class="prow" data-scope="${p.id}" aria-label="${esc(`Само ${placeName(p)}: ${C.eur(x.total)}, ${line}`)}"><i class="dot k${p.c}" aria-hidden="true"></i><span class="pname">${esc(placeName(p))}</span><span class="pval">${esc(C.eur(x.total))}</span><span class="psub">${esc(line)}</span></button>`;
+      });
+      $('shareBar').innerHTML = bar;
+      $('shareBar').hidden = !bar;
+      $('placeList').innerHTML = rowsH;
+    }
+
     // chart
-    let series, unit, chTitle;
-    if (P.mode === 'week' || P.mode === 'month') { series = C.daySeries(E, r.start, r.end); unit = 'day'; chTitle = 'По дни'; }
-    else if (P.mode === 'year') { series = C.monthSeries(E, r.start, `${C.parts(r.start).y}-12-01`); unit = 'month'; chTitle = 'По месеци'; }
+    let unit, chTitle, a, b;
+    if (P.mode === 'week' || P.mode === 'month') { unit = 'day'; a = r.start; b = r.end; chTitle = 'По дни'; }
+    else if (P.mode === 'year') { unit = 'month'; a = r.start; b = `${C.parts(r.start).y}-12-01`; chTitle = 'По месеци'; }
     else {
       const fm = C.monthStart(r.start), lm = C.monthStart(t);
-      if (C.monthsBetween(fm, lm) < 24) { series = C.monthSeries(E, fm, lm); unit = 'month'; chTitle = 'По месеци'; }
-      else { series = C.yearSeries(E, C.parts(fm).y, C.parts(t).y); unit = 'year'; chTitle = 'По години'; }
+      if (C.monthsBetween(fm, lm) < 24) { unit = 'month'; a = fm; b = lm; chTitle = 'По месеци'; }
+      else { unit = 'year'; a = C.parts(fm).y; b = C.parts(t).y; chTitle = 'По години'; }
     }
+    const series = stacked ? C.splitSeries(S.entries, ids, unit, a, b)
+      : unit === 'day' ? C.daySeries(E, a, b) : unit === 'month' ? C.monthSeries(E, a, b) : C.yearSeries(E, a, b);
     $('chTitle').textContent = chTitle;
     let avg = 0, bestKey = null;
     if (unit === 'day') { avg = st.count > 1 ? st.avg : 0; bestKey = st.best && st.count > 1 ? st.best.date : null; }
     else {
       const withData = series.filter(x => x.cents != null);
       if (withData.length > 1) {
-        avg = Math.round(withData.reduce((a, x) => a + x.cents, 0) / withData.length);
-        bestKey = withData.reduce((a, b) => b.cents > a.cents ? b : a).key;
+        avg = Math.round(withData.reduce((s2, x) => s2 + x.cents, 0) / withData.length);
+        bestKey = withData.reduce((p1, p2) => p2.cents > p1.cents ? p2 : p1).key;
       }
     }
-    S.chartArgs = { series, unit, avg, bestKey, title: chTitle };
+    const places = stacked ? S.data.places.slice() : null;
+    S.chartArgs = { series, unit, avg, bestKey, title: chTitle, k, places };
     S.readoutIdx = -1;
+    const lg = $('chLegend');
+    lg.hidden = !stacked;
+    lg.innerHTML = stacked ? places.map(p => `<span class="lg"><i class="sw k${p.c}" aria-hidden="true"></i>${esc(placeName(p))}</span>`).join('') : '';
     drawChart();
-    $('chTable').innerHTML = tableHtml(series, unit);
+    $('chTable').innerHTML = tableHtml(series, unit, places);
 
     // weekdays
     const wdCard = $('wdCard');
     if (P.mode === 'week' || !st.count) { wdCard.hidden = true; return; }
     wdCard.hidden = false;
-    const wst = C.weekdayStats(E, r.start, r.end);
+    const wst = stacked ? C.weekdaySplit(S.entries, ids, r.start, r.end) : C.weekdayStats(E, r.start, r.end);
     const max = Math.max(...wst.map(w => w.avg || 0));
     let bestW = -1;
     wst.forEach((w, i) => { if (w.avg != null && (bestW < 0 || w.avg > wst[bestW].avg)) bestW = i; });
@@ -1134,20 +1475,26 @@ var BTCore = (() => {
       h += `<span class="wd-name">${C.WD_S[i]}</span>`;
       if (w.avg == null) { h += '<span class="wd-none">няма записи</span>'; return; }
       const pct = max ? Math.max(1.5, w.avg / max * 100) : 0;
-      h += `<span class="wd-track"><span class="wd-bar${i === bestW && showBest ? ' best' : ''}" style="width:${pct.toFixed(1)}%"></span></span>`;
+      if (stacked) {
+        let segs = '';
+        w.parts.forEach((pcents, j) => { if (pcents > 0) segs += `<span class="k${places[j].c}" style="flex:${pcents} 1 0px"></span>`; });
+        h += `<span class="wd-track"><span class="wd-stack" style="width:${pct.toFixed(1)}%">${segs || '<span class="z" style="flex:1 1 0px"></span>'}</span></span>`;
+      } else h += `<span class="wd-track"><span class="wd-bar k${k}${i === bestW && showBest ? ' best' : ''}" style="width:${pct.toFixed(1)}%"></span></span>`;
       h += `<span class="wd-val">${esc(C.eur(w.avg, 0))}<small>${w.count}&nbsp;${w.count === 1 ? 'ден' : 'дни'}</small></span>`;
     });
     $('wd').innerHTML = h;
   }
 
-  function readoutText(s, unit) {
+  function readoutText(s, unit, places) {
     let head, val;
     if (unit === 'day') head = C.dateShort(s.key);
     else if (unit === 'month') { const p = C.parts(s.key); head = `${C.cap(C.MONTHS[p.m - 1])} ${p.y}`; }
     else head = String(C.parts(s.key).y);
     if (s.cents != null) val = C.eur(s.cents) + (unit !== 'day' ? ` · ${C.workDaysWord(s.count)}` : '');
     else val = s.off ? 'почивен ден' : unit === 'day' ? 'няма запис' : 'няма записи';
-    return { head, val };
+    const bits = [];
+    if (places && s.parts) s.parts.forEach((pc, j) => { if (pc != null) bits.push(`${placeName(places[j])} ${C.eur(pc)}`); });
+    return { head, val, split: bits.join(' · ') };
   }
   function setReadout(i) {
     const A = S.chartArgs, el = $('readout');
@@ -1160,20 +1507,35 @@ var BTCore = (() => {
       return;
     }
     S.readoutIdx = i;
-    const r = readoutText(A.series[i], A.unit);
-    el.innerHTML = `${esc(r.head)} — <strong>${esc(r.val)}</strong>`;
-    const bar = $('chart').querySelector(`.bar[data-i="${i}"]`);
-    if (bar) bar.classList.add('on');
+    const r = readoutText(A.series[i], A.unit, A.places);
+    el.innerHTML = `${esc(r.head)} — <strong>${esc(r.val)}</strong>${r.split ? ` <span class="split">(${esc(r.split)})</span>` : ''}`;
+    for (const b of $('chart').querySelectorAll(`.bar[data-i="${i}"]`)) b.classList.add('on');
   }
   function barPath(x, y, w, base, rad) {
     const h = base - y, r = Math.max(0, Math.min(rad, w / 2, h));
     const f = n => n.toFixed(1);
     return `M${f(x)},${f(base)}V${f(y + r)}Q${f(x)},${f(y)} ${f(x + r)},${f(y)}H${f(x + w - r)}Q${f(x + w)},${f(y)} ${f(x + w)},${f(y + r)}V${f(base)}Z`;
   }
+  // One bar per day built from each place's part, bottom to top, with a 2px gap between parts.
+  function stackBars(s, i, x, bw, yv, base, places) {
+    const segs = [];
+    let acc = 0;
+    s.parts.forEach((pc, j) => { if (pc > 0) { segs.push({ j, from: acc, to: acc + pc }); acc += pc; } });
+    let out = '';
+    segs.forEach((g, n) => {
+      const top = yv(g.to), bot = n ? yv(g.from) - 2 : base;
+      if (bot - top < 0.75) return;
+      const cls = `bar k${places[g.j].c}`;
+      out += n === segs.length - 1
+        ? `<path class="${cls}" data-i="${i}" d="${barPath(x, top, bw, bot, 4)}"/>`
+        : `<rect class="${cls}" data-i="${i}" x="${x.toFixed(1)}" y="${top.toFixed(1)}" width="${bw.toFixed(1)}" height="${(bot - top).toFixed(1)}"/>`;
+    });
+    return out;
+  }
   function drawChart() {
     const host = $('chart'), A = S.chartArgs;
     if (!A) { host.innerHTML = ''; return; }
-    const { series, unit, avg, bestKey } = A;
+    const { series, unit, avg, bestKey, places } = A;
     const vals = series.map(s => s.cents).filter(v => v != null);
     if (!vals.length) { host.innerHTML = '<p class="empty">Няма записи за този период.</p>'; $('readout').textContent = ''; return; }
     const W = Math.max(260, Math.round(host.clientWidth || 320));
@@ -1195,7 +1557,8 @@ var BTCore = (() => {
       const cx = L + band * i + band / 2, x = cx - bw / 2;
       if (s.cents != null) {
         if (s.cents === 0) bars += `<rect class="bar zero" data-i="${i}" x="${x.toFixed(1)}" y="${(base - 2).toFixed(1)}" width="${bw.toFixed(1)}" height="2"/>`;
-        else bars += `<path class="bar${s.key === bestKey ? ' best' : ''}" data-i="${i}" d="${barPath(x, yv(s.cents), bw, base, 4)}"/>`;
+        else if (places) bars += stackBars(s, i, x, bw, yv, base, places);
+        else bars += `<path class="bar k${A.k}${s.key === bestKey ? ' best' : ''}" data-i="${i}" d="${barPath(x, yv(s.cents), bw, base, 4)}"/>`;
         if (s.key === bestKey) bestI = i;
       }
       const p = C.parts(s.key), ly = H - B + 15;
@@ -1206,8 +1569,8 @@ var BTCore = (() => {
         const every = Math.max(1, Math.ceil(26 / band)); // keep month names from touching
         if (i % every === 0) labels += `<text class="ax" x="${cx.toFixed(1)}" y="${ly}" text-anchor="middle">${p.m === 1 && n > 12 ? String(p.y) : C.MONTHS_AX[p.m - 1]}</text>`;
       } else labels += `<text class="ax" x="${cx.toFixed(1)}" y="${ly}" text-anchor="middle">${p.y}</text>`;
-      const r = readoutText(s, unit);
-      hits += `<rect class="hit" data-i="${i}" x="${(L + band * i).toFixed(1)}" y="${T - 6}" width="${band.toFixed(1)}" height="${(ph + 6).toFixed(1)}" tabindex="0" role="img" aria-label="${esc(r.head + ': ' + r.val)}"/>`;
+      const r = readoutText(s, unit, places);
+      hits += `<rect class="hit" data-i="${i}" x="${(L + band * i).toFixed(1)}" y="${T - 6}" width="${band.toFixed(1)}" height="${(ph + 6).toFixed(1)}" tabindex="0" role="img" aria-label="${esc(r.head + ': ' + r.val + (r.split ? ', ' + r.split : ''))}"/>`;
     });
     if (avg) {
       const y = yv(avg).toFixed(1);
@@ -1220,14 +1583,16 @@ var BTCore = (() => {
     host.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="group" aria-label="${esc(A.title)}">${grid}${bars}${marks}${labels}${hits}</svg>`;
     setReadout(S.readoutIdx);
   }
-  function tableHtml(series, unit) {
+  function tableHtml(series, unit, places) {
     const rows = series.filter(s => s.cents != null || s.off);
     if (!rows.length) return '<p class="small">Няма записи.</p>';
     const head = unit === 'day' ? 'Ден' : unit === 'month' ? 'Месец' : 'Година';
-    let h = `<table class="tbl"><thead><tr><th scope="col">${head}</th><th scope="col" class="num">Бакшиш</th>${unit !== 'day' ? '<th scope="col" class="num">Дни</th>' : ''}</tr></thead><tbody>`;
+    const pcols = places ? places.map(p => `<th scope="col" class="num">${esc(placeName(p))}</th>`).join('') : '';
+    let h = `<table class="tbl"><thead><tr><th scope="col">${head}</th>${pcols}<th scope="col" class="num">${places ? 'Общо' : 'Бакшиш'}</th>${unit !== 'day' ? '<th scope="col" class="num">Дни</th>' : ''}</tr></thead><tbody>`;
     for (const s of rows) {
-      const r = readoutText(s, unit);
-      h += `<tr><td>${esc(r.head)}</td><td class="num">${esc(s.cents != null ? C.eur(s.cents) : 'почивен ден')}</td>${unit !== 'day' ? `<td class="num">${s.count}</td>` : ''}</tr>`;
+      const r = readoutText(s, unit, null);
+      const pc = places ? places.map((p, j) => `<td class="num">${s.parts && s.parts[j] != null ? esc(C.eur(s.parts[j])) : '—'}</td>`).join('') : '';
+      h += `<tr><td>${esc(r.head)}</td>${pc}<td class="num">${esc(s.cents != null ? C.eur(s.cents) : 'почивен ден')}</td>${unit !== 'day' ? `<td class="num">${s.count}</td>` : ''}</tr>`;
     }
     return h + '</tbody></table>';
   }
@@ -1235,32 +1600,35 @@ var BTCore = (() => {
   /* ---------- calendar ---------- */
   function renderCal() {
     syncAnchors();
-    const E = S.entries;
+    renderScope('scopeC');
+    const sc = scope();
+    const E = C.flatten(S.entries, sc);
     const t = C.today(), wDate = C.workDate(), a = S.calAnchor, p = C.parts(a), nDays = C.dim(p.y, p.m);
     $('cTitle').textContent = C.monthTitle(a);
     const st = C.stats(E, a, C.monthEnd(a));
     $('cSub').textContent = st.count ? `Общо ${C.eur(st.total)} · ${C.workDaysWord(st.count)}` : 'Няма записи за този месец';
     $('cNext').disabled = C.addMonths(a, 1) > t;
-    const sc = C.heatScale(Object.keys(E).filter(k => !E[k].off).map(k => E[k].cents));
+    const scale = C.heatScale(Object.keys(E).filter(k => !E[k].off).map(k => E[k].cents));
     const first = S.first;
     const work = S.data.settings.workDays;
     let h = '';
     for (let i = 0, lead = C.weekday(a); i < lead; i++) h += '<span class="cell blank" aria-hidden="true"></span>';
     for (let d = 1; d <= nDays; d++) {
-      const ds = C.ymd(p.y, p.m, d), e = E[ds], future = ds > t;
-      const missed = !e && !future && first && ds >= first && ds < wDate && work.includes(C.weekday(ds));
+      const ds = C.ymd(p.y, p.m, d), e = E[ds], any = S.entries[ds], future = ds > t;
+      // a working day is missed only when nothing at all was saved for it
+      const missed = !any && !future && first && ds >= first && ds < wDate && work.includes(C.weekday(ds));
       let cls = 'cell', amt = '', aria = C.dateLong(ds);
       if (future) cls += ' future';
       else if (e && e.off) { cls += ' off'; amt = '—'; aria += ': почивен ден'; }
-      else if (e) { cls += ' h' + C.heatLevel(e.cents, sc); amt = C.compactEur(e.cents); aria += ': ' + C.eur(e.cents); }
+      else if (e) { cls += ' h' + C.heatLevel(e.cents, scale); amt = C.compactEur(e.cents); aria += ': ' + C.eur(e.cents); }
       else if (missed) { cls += ' missed'; amt = '?'; aria += ': липсва запис'; }
-      else aria += ': няма запис';
+      else aria += any ? ': няма запис за това място' : ': няма запис';
       if (ds === t) { cls += ' today'; aria += ', днес'; }
       h += `<button type="button" class="${cls}" data-date="${ds}"${future ? ' disabled' : ''} aria-label="${esc(aria)}"><span class="dn">${d}</span><span class="amt">${esc(amt)}</span></button>`;
     }
     $('calGrid').innerHTML = h;
     let lg = '';
-    if (sc) lg += `<span class="ramp"><span>${esc(C.eur(sc.min, 0))}</span><i class="h1"></i><i class="h2"></i><i class="h3"></i><i class="h4"></i><i class="h5"></i><span>${esc(C.eur(sc.max, 0))}</span></span>`;
+    if (scale) lg += `<span class="ramp"><span>${esc(C.eur(scale.min, 0))}</span><i class="h1"></i><i class="h2"></i><i class="h3"></i><i class="h4"></i><i class="h5"></i><span>${esc(C.eur(scale.max, 0))}</span></span>`;
     if (work.length) lg += '<span class="lg"><i class="lg-missed"></i>липсва запис</span>';
     lg += '<span class="lg"><i class="lg-off">—</i>почивен ден</span>';
     $('calLegend').innerHTML = lg;
@@ -1271,7 +1639,33 @@ var BTCore = (() => {
     S.data.settings = C.sanitizeSettings(Object.assign({}, S.data.settings, patch));
     save(); renderSettings();
   }
+  function renderPlaces() {
+    const P = S.data.places, g = $('placesGroup');
+    const sig = P.map(p => p.id + ':' + p.c).join(',') + '|' + (S.placeArm ? S.placeArm.id : '');
+    if (g.dataset.sig !== sig) {
+      g.dataset.sig = sig;
+      let h = '';
+      if (P.length < 2) {
+        h = '<div class="item block"><p>Работиш на две места? Добави второто и записвай бакшишите поотделно. Статистиката е за всяко място и общо.</p>' +
+          '<div class="btns"><button class="btn primary" type="button" data-add-place>Добави второ място</button></div></div>';
+      } else {
+        P.forEach((p, i) => {
+          const armed = !!(S.placeArm && S.placeArm.id === p.id);
+          const n = armed ? placeRecords(p.id) : 0;
+          h += `<div class="item block place-item"><div class="place-row"><i class="dot k${p.c}" aria-hidden="true"></i>` +
+            `<input type="text" id="placeName-${p.id}" data-name="${p.id}" maxlength="24" autocomplete="off" enterkeyhint="done" placeholder="Място ${i + 1}" aria-label="Име на място ${i + 1}">` +
+            `<button class="link danger" type="button" data-remove="${p.id}">${armed ? 'Потвърди' : 'Махни'}</button></div>` +
+            (armed ? `<p class="small warn-line">Ще изтриеш и ${n} ${n === 1 ? 'запис' : 'записа'} за това място.</p>` : '') + '</div>';
+        });
+        if (P.length < C.MAX_PLACES) h += '<div class="item block"><button class="link" type="button" data-add-place>+ Добави още едно място</button></div>';
+      }
+      g.innerHTML = h;
+    }
+    for (const p of P) { const inp = $('placeName-' + p.id); if (inp && document.activeElement !== inp) inp.value = p.name; }
+    $('placesFoot').hidden = P.length < 2;
+  }
   function renderSettings() {
+    renderPlaces();
     const s = S.data.settings;
     const chips = $('dayChips');
     if (!chips.children.length) {
@@ -1344,7 +1738,7 @@ var BTCore = (() => {
     catch (e) { return e && e.name === 'AbortError' ? 'cancel' : 'no'; }
   }
   async function exportBackup() {
-    const text = JSON.stringify(C.buildBackup(S.entries, S.data.settings, new Date().toISOString()), null, 2);
+    const text = JSON.stringify(C.buildBackup(S.entries, S.data.settings, new Date().toISOString(), S.data.places), null, 2);
     const name = `moyat-bakshish-${C.today()}.json`;
     if (S.downloads) {
       try { await S.downloads.save({ filename: name, data: text }); markBackup(); toast('Копието е запазено.'); render(); return; }
@@ -1368,20 +1762,36 @@ var BTCore = (() => {
     catch (e) { box.focus(); box.select(); toast('Копирай текста от полето и го запази.'); }
     render();
   }
+  // How a backup fits this phone: its places are matched by id, new ones are added (up to the limit),
+  // and on an empty phone the backup's places are taken as they are.
+  function planImport(p) {
+    const fresh = Object.keys(S.data.entries).length === 0;
+    const places = (fresh && p.places.length ? p.places : S.data.places).map(x => Object.assign({}, x));
+    const map = {};
+    for (const ip of p.places) {
+      let lp = places.find(x => x.id === ip.id);
+      if (!lp && places.length < C.MAX_PLACES) { lp = { id: ip.id, name: ip.name, c: C.freeColor(places) }; places.push(lp); }
+      if (lp && !lp.name && ip.name) lp.name = ip.name;
+      map[ip.id] = lp ? lp.id : places[0].id;
+    }
+    map[''] = places[0].id;
+    return { places, merged: C.mergeDays(S.data.entries, p.entries, map) };
+  }
   function onImportFile(file) {
     if (!file) return;
     const rd = new FileReader();
     rd.onload = () => {
       let parsed = null;
       try { parsed = C.parseBackup(JSON.parse(String(rd.result))); } catch (e) { parsed = null; }
-      const n = parsed ? Object.keys(parsed.entries).length : 0;
+      const n = parsed ? parsed.rows : 0;
       if (!parsed || !n) { toast('Файлът не прилича на резервно копие.'); return; }
       S.importData = parsed;
+      const plan = planImport(parsed);
       const ks = Object.keys(parsed.entries).sort();
-      const overlap = ks.filter(k => S.entries[k]).length;
       const span = ks.length === 1 ? `за ${C.dateShort(ks[0], true)}` : `от ${C.dateShort(ks[0], true)} до ${C.dateShort(ks[ks.length - 1], true)}`;
-      $('importText').textContent = `Във файла има ${n} ${n === 1 ? 'запис' : 'записа'} (${span}).` +
-        (overlap ? ` ${overlap} от тях ще заменят записи, които вече имаш.` : '');
+      const names = parsed.places.length > 1 ? ` за ${parsed.places.length} места: ${C.listBg(parsed.places.map((x, i) => x.name || `Място ${i + 1}`))}` : '';
+      $('importText').textContent = `Във файла има ${n} ${n === 1 ? 'запис' : 'записа'} (${span})${names}.` +
+        (plan.merged.over ? ` ${plan.merged.over} от тях ще заменят записи, които вече имаш.` : '');
       $('importBox').hidden = false;
     };
     rd.onerror = () => toast('Файлът не може да бъде прочетен.');
@@ -1389,12 +1799,15 @@ var BTCore = (() => {
   }
   function applyImport() {
     const p = S.importData; if (!p) return;
-    const ks = Object.keys(p.entries);
-    for (const d of ks) S.data.entries[d] = p.entries[d];
+    const plan = planImport(p);
+    S.data.places = plan.places;
+    S.data.entries = plan.merged.entries;
     if (p.settings && !S.data.settings.workDays.length && p.settings.workDays.length) S.data.settings = p.settings;
+    S.data = cleanData(S.data);
     save(); recompute();
     S.importData = null; $('importBox').hidden = true; $('importFile').value = '';
-    toast(`Възстановени ${ks.length} ${ks.length === 1 ? 'запис' : 'записа'}.`);
+    const n = plan.merged.n;
+    toast(`Възстановени ${n} ${n === 1 ? 'запис' : 'записа'}.`);
     render();
   }
 
@@ -1417,6 +1830,13 @@ var BTCore = (() => {
     $('missedChips').addEventListener('click', ev => { const b = ev.target.closest('[data-date]'); if (b) selectDate(b.dataset.date); });
     $('dPrev').addEventListener('click', () => selectDate(C.addDays(S.selDate, -1)));
     $('dNext').addEventListener('click', () => { if (S.selDate < C.today()) selectDate(C.addDays(S.selDate, 1)); });
+    $('placeSeg').addEventListener('click', ev => {
+      const b = ev.target.closest('[data-place]'); if (!b) return;
+      if (S.editMode) { S.expr = ''; S.editMode = false; S.freshEdit = false; }
+      S.delArmed = 0;
+      setPlace(b.dataset.place);
+      renderEntry();
+    });
 
     $('keypad').addEventListener('click', ev => {
       const b = ev.target.closest('button'); if (!b) return;
@@ -1437,18 +1857,32 @@ var BTCore = (() => {
       else if (ev.key === 'Enter' && !(tg && tg.tagName === 'BUTTON')) { if (C.exprCents(S.expr) != null) { ev.preventDefault(); saveTyped(); } return; }
       if (k) { ev.preventDefault(); typeKey(k); }
     });
-    $('offBtn').addEventListener('click', () => { putEntry(S.selDate, { off: true }); toast(`Отбелязано: почивен ден, ${C.dateShort(S.selDate)}`); render(); });
+    $('offBtn').addEventListener('click', () => { putOff(S.selDate); toast(`Отбелязано: почивен ден, ${C.dateShort(S.selDate)}`); render(); });
     $('clearBtn').addEventListener('click', cancelEdit);
     $('recentList').addEventListener('click', ev => {
       const b = ev.target.closest('[data-date]'); if (!b) return;
-      selectDate(b.dataset.date); startEdit();
+      selectDate(b.dataset.date);
+      if (b.dataset.place) { setPlace(b.dataset.place); startEdit(); }
     });
     $('delBtn').addEventListener('click', () => {
-      if (S.delArmed && Date.now() - S.delArmed < 4000) { S.delArmed = 0; putEntry(S.selDate, null); toast('Записът е изтрит.'); render(); return; }
+      if (S.delArmed && Date.now() - S.delArmed < 4000) {
+        S.delArmed = 0;
+        const d = S.selDate, pid = curPlace(), rec = S.entries[d];
+        const named = multi() && rec && !rec.off;
+        removeRecord(d, pid);
+        toast(named ? `Записът за ${placeName(placeById(pid))} е изтрит.` : 'Записът е изтрит.');
+        render(); return;
+      }
       S.delArmed = Date.now(); renderEntry();
       setTimeout(() => { if (S.delArmed && Date.now() - S.delArmed >= 4000) { S.delArmed = 0; if (S.tab === 'entry') renderEntry(); } }, 4100);
     });
 
+    for (const id of ['scopeS', 'scopeC']) $(id).addEventListener('click', ev => { const b = ev.target.closest('[data-scope]'); if (b) setScope(b.dataset.scope); });
+    $('placeList').addEventListener('click', ev => {
+      const b = ev.target.closest('[data-scope]'); if (!b) return;
+      setScope(b.dataset.scope);
+      try { window.scrollTo(0, 0); } catch (e) { /* ignore */ }
+    });
     $('pSeg').addEventListener('click', ev => {
       const b = ev.target.closest('[data-mode]'); if (!b) return;
       S.period.mode = b.dataset.mode; S.anchorsTouched = false; renderStats();
@@ -1470,7 +1904,34 @@ var BTCore = (() => {
 
     $('cPrev').addEventListener('click', () => { S.calAnchor = C.addMonths(S.calAnchor, -1); S.anchorsTouched = true; renderCal(); });
     $('cNext').addEventListener('click', () => { const nx = C.addMonths(S.calAnchor, 1); if (nx <= C.today()) { S.calAnchor = nx; S.anchorsTouched = true; renderCal(); } });
-    $('calGrid').addEventListener('click', ev => { const b = ev.target.closest('.cell[data-date]'); if (b && !b.disabled) selectDate(b.dataset.date); });
+    $('calGrid').addEventListener('click', ev => {
+      const b = ev.target.closest('.cell[data-date]'); if (!b || b.disabled) return;
+      const sc = scope();
+      if (sc !== 'all') setPlace(sc);
+      selectDate(b.dataset.date);
+    });
+
+    const pg = $('placesGroup');
+    pg.addEventListener('click', ev => {
+      if (ev.target.closest('[data-add-place]')) { addPlace(); return; }
+      const rm = ev.target.closest('[data-remove]'); if (!rm) return;
+      const id = rm.dataset.remove;
+      const armed = S.placeArm && S.placeArm.id === id && Date.now() - S.placeArm.at < 5000;
+      if (armed || placeRecords(id) === 0) { removePlace(id); return; }
+      S.placeArm = { id, at: Date.now() };
+      renderSettings();
+      setTimeout(() => {
+        if (S.placeArm && S.placeArm.id === id && Date.now() - S.placeArm.at >= 5000) { S.placeArm = null; if (S.tab === 'settings') renderSettings(); }
+      }, 5100);
+    });
+    pg.addEventListener('input', ev => {
+      const inp = ev.target.closest('[data-name]'); if (!inp) return;
+      const p = placeById(inp.dataset.name); if (!p) return;
+      p.name = C.cleanName(inp.value);
+      save();
+    });
+    pg.addEventListener('change', ev => { if (ev.target.closest('[data-name]')) renderSettings(); });
+    pg.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.closest('[data-name]')) ev.target.blur(); });
 
     $('dayChips').addEventListener('click', ev => {
       const b = ev.target.closest('[data-wd]'); if (!b) return;
