@@ -35,6 +35,9 @@ img{max-width:100%}
   --down:#B42318; --warn:#C2410C; --warn-soft:#FDF0E7;
   --heat-1:#88C09E; --heat-2:#5AA37C; --heat-3:#358460; --heat-4:#1D6547; --heat-5:#0F402C;
   --heat-ink-1:#18201C; --heat-ink-2:#18201C; --heat-ink-3:#FFFFFF; --heat-ink-4:#FFFFFF; --heat-ink-5:#FFFFFF;
+  --heat2-1:#EF9778; --heat2-2:#D86F48; --heat2-3:#B64F26; --heat2-4:#8F3610; --heat2-5:#5C2007;
+  --heat3-1:#86B6EF; --heat3-2:#5598E7; --heat3-3:#256ABF; --heat3-4:#184F95; --heat3-5:#0D366B;
+  --cal-1:#449C76; --cal-2:#EB6834; --cal-3:#3987E5; --cal-ink:#18201C;
   --shadow:0 1px 2px rgba(24,32,28,.12);
   --tabbar:rgba(255,255,255,.92);
   --font:"Sofia Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
@@ -48,6 +51,9 @@ img{max-width:100%}
     --down:#F97066; --warn:#F2994A; --warn-soft:#2A1D12;
     --heat-1:#295D46; --heat-2:#2D7553; --heat-3:#3F9C6F; --heat-4:#6CC094; --heat-5:#A9E2C2;
     --heat-ink-1:#E9EEEB; --heat-ink-2:#E9EEEB; --heat-ink-3:#06110B; --heat-ink-4:#06110B; --heat-ink-5:#06110B;
+    --heat2-1:#7F3A20; --heat2-2:#A3441D; --heat2-3:#D85C29; --heat2-4:#FB875C; --heat2-5:#FDC4AF;
+    --heat3-1:#184F95; --heat3-2:#256ABF; --heat3-3:#3987E5; --heat3-4:#86B6EF; --heat3-5:#B7D3F6;
+    --cal-1:#2E9467; --cal-2:#D95926; --cal-3:#3987E5; --cal-ink:#06110B;
     --shadow:0 1px 2px rgba(0,0,0,.5);
     --tabbar:rgba(24,28,26,.92);
     color-scheme:dark;
@@ -61,6 +67,9 @@ img{max-width:100%}
   --down:#F97066; --warn:#F2994A; --warn-soft:#2A1D12;
   --heat-1:#295D46; --heat-2:#2D7553; --heat-3:#3F9C6F; --heat-4:#6CC094; --heat-5:#A9E2C2;
   --heat-ink-1:#E9EEEB; --heat-ink-2:#E9EEEB; --heat-ink-3:#06110B; --heat-ink-4:#06110B; --heat-ink-5:#06110B;
+  --heat2-1:#7F3A20; --heat2-2:#A3441D; --heat2-3:#D85C29; --heat2-4:#FB875C; --heat2-5:#FDC4AF;
+  --heat3-1:#184F95; --heat3-2:#256ABF; --heat3-3:#3987E5; --heat3-4:#86B6EF; --heat3-5:#B7D3F6;
+  --cal-1:#2E9467; --cal-2:#D95926; --cal-3:#3987E5; --cal-ink:#06110B;
   --shadow:0 1px 2px rgba(0,0,0,.5);
   --tabbar:rgba(24,28,26,.92);
   color-scheme:dark;
@@ -73,6 +82,9 @@ img{max-width:100%}
   --down:#B42318; --warn:#C2410C; --warn-soft:#FDF0E7;
   --heat-1:#88C09E; --heat-2:#5AA37C; --heat-3:#358460; --heat-4:#1D6547; --heat-5:#0F402C;
   --heat-ink-1:#18201C; --heat-ink-2:#18201C; --heat-ink-3:#FFFFFF; --heat-ink-4:#FFFFFF; --heat-ink-5:#FFFFFF;
+  --heat2-1:#EF9778; --heat2-2:#D86F48; --heat2-3:#B64F26; --heat2-4:#8F3610; --heat2-5:#5C2007;
+  --heat3-1:#86B6EF; --heat3-2:#5598E7; --heat3-3:#256ABF; --heat3-4:#184F95; --heat3-5:#0D366B;
+  --cal-1:#449C76; --cal-2:#EB6834; --cal-3:#3987E5; --cal-ink:#18201C;
   --shadow:0 1px 2px rgba(24,32,28,.12);
   --tabbar:rgba(255,255,255,.92);
   color-scheme:light;
@@ -230,6 +242,14 @@ h1,h2,h3{text-wrap:balance}
 .h3{background:var(--heat-3);color:var(--heat-ink-3)}
 .h4{background:var(--heat-4);color:var(--heat-ink-4)}
 .h5{background:var(--heat-5);color:var(--heat-ink-5)}
+/* one place shown: its own colour, darker = more. All places: each day in its place's colour */
+.hue2{--heat-1:var(--heat2-1);--heat-2:var(--heat2-2);--heat-3:var(--heat2-3);--heat-4:var(--heat2-4);--heat-5:var(--heat2-5)}
+.hue3{--heat-1:var(--heat3-1);--heat-2:var(--heat3-2);--heat-3:var(--heat3-3);--heat-4:var(--heat3-4);--heat-5:var(--heat3-5)}
+.cell.pc{color:var(--cal-ink)}
+.pc1{background:var(--cal-1)}
+.pc2{background:var(--cal-2)}
+.pc3{background:var(--cal-3)}
+.lg-sw{width:16px;height:14px;display:inline-block;border-radius:3px}
 .legend{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin-top:14px;font-size:13px;color:var(--text-2)}
 .ramp,.lg{display:inline-flex;align-items:center;gap:5px}
 .ramp i{width:16px;height:14px;display:inline-block;border-radius:3px}
@@ -1598,10 +1618,26 @@ var BTCore = (() => {
   }
 
   /* ---------- calendar ---------- */
+  // A day worked at several places: one band per place, top to bottom, with a thin cut between them.
+  // With three places the last band is taller, so no cut runs through the amount at the bottom.
+  function bandsBg(cs) {
+    const n = cs.length, cuts = n === 3 ? [30, 55] : Array.from({ length: n - 1 }, (_, i) => 100 * (i + 1) / n);
+    const at = i => (i === 0 ? 0 : i === n ? 100 : cuts[i - 1]) + '%', stops = [];
+    cs.forEach((c, i) => {
+      stops.push(`var(--cal-${c}) ${i ? `calc(${at(i)} + 1px)` : '0%'} ${i < n - 1 ? `calc(${at(i + 1)} - 1px)` : '100%'}`);
+      if (i < n - 1) stops.push(`var(--bg) calc(${at(i + 1)} - 1px) calc(${at(i + 1)} + 1px)`);
+    });
+    return `linear-gradient(to bottom, ${stops.join(', ')})`;
+  }
   function renderCal() {
     syncAnchors();
     renderScope('scopeC');
-    const sc = scope();
+    const sc = scope(), byPlace = multi() && sc === 'all';
+    // one place shown: its colour, darker = more; all places: every day in the colour of its place
+    const pl = sc !== 'all' ? placeById(sc) : byPlace ? null : S.data.places[0];
+    const hue = pl ? pl.c : 1;
+    $('view-calendar').classList.toggle('hue2', hue === 2);
+    $('view-calendar').classList.toggle('hue3', hue === 3);
     const E = C.flatten(S.entries, sc);
     const t = C.today(), wDate = C.workDate(), a = S.calAnchor, p = C.parts(a), nDays = C.dim(p.y, p.m);
     $('cTitle').textContent = C.monthTitle(a);
@@ -1617,18 +1653,27 @@ var BTCore = (() => {
       const ds = C.ymd(p.y, p.m, d), e = E[ds], any = S.entries[ds], future = ds > t;
       // a working day is missed only when nothing at all was saved for it
       const missed = !any && !future && first && ds >= first && ds < wDate && work.includes(C.weekday(ds));
-      let cls = 'cell', amt = '', aria = C.dateLong(ds);
+      let cls = 'cell', amt = '', aria = C.dateLong(ds), style = '';
       if (future) cls += ' future';
       else if (e && e.off) { cls += ' off'; amt = '—'; aria += ': почивен ден'; }
-      else if (e) { cls += ' h' + C.heatLevel(e.cents, scale); amt = C.compactEur(e.cents); aria += ': ' + C.eur(e.cents); }
+      else if (e) {
+        amt = C.compactEur(e.cents); aria += ': ' + C.eur(e.cents);
+        const here = byPlace ? S.data.places.filter(x => any.by[x.id] != null) : [];
+        if (here.length === 1) { cls += ' pc pc' + here[0].c; aria += ', ' + placeName(here[0]); }
+        else if (here.length > 1) {
+          cls += ' pc'; style = ` style="background:${bandsBg(here.map(x => x.c))}"`;
+          aria += ' (' + here.map(x => `${placeName(x)} ${C.eur(any.by[x.id])}`).join(', ') + ')';
+        } else cls += ' h' + C.heatLevel(e.cents, scale);
+      }
       else if (missed) { cls += ' missed'; amt = '?'; aria += ': липсва запис'; }
       else aria += any ? ': няма запис за това място' : ': няма запис';
       if (ds === t) { cls += ' today'; aria += ', днес'; }
-      h += `<button type="button" class="${cls}" data-date="${ds}"${future ? ' disabled' : ''} aria-label="${esc(aria)}"><span class="dn">${d}</span><span class="amt">${esc(amt)}</span></button>`;
+      h += `<button type="button" class="${cls}"${style} data-date="${ds}"${future ? ' disabled' : ''} aria-label="${esc(aria)}"><span class="dn">${d}</span><span class="amt">${esc(amt)}</span></button>`;
     }
     $('calGrid').innerHTML = h;
     let lg = '';
-    if (scale) lg += `<span class="ramp"><span>${esc(C.eur(scale.min, 0))}</span><i class="h1"></i><i class="h2"></i><i class="h3"></i><i class="h4"></i><i class="h5"></i><span>${esc(C.eur(scale.max, 0))}</span></span>`;
+    if (byPlace) lg += S.data.places.map(x => `<span class="lg"><i class="lg-sw pc${x.c}"></i>${esc(placeName(x))}</span>`).join('');
+    else if (scale) lg += `<span class="ramp"><span>${esc(C.eur(scale.min, 0))}</span><i class="h1"></i><i class="h2"></i><i class="h3"></i><i class="h4"></i><i class="h5"></i><span>${esc(C.eur(scale.max, 0))}</span></span>`;
     if (work.length) lg += '<span class="lg"><i class="lg-missed"></i>липсва запис</span>';
     lg += '<span class="lg"><i class="lg-off">—</i>почивен ден</span>';
     $('calLegend').innerHTML = lg;
@@ -1906,8 +1951,11 @@ var BTCore = (() => {
     $('cNext').addEventListener('click', () => { const nx = C.addMonths(S.calAnchor, 1); if (nx <= C.today()) { S.calAnchor = nx; S.anchorsTouched = true; renderCal(); } });
     $('calGrid').addEventListener('click', ev => {
       const b = ev.target.closest('.cell[data-date]'); if (!b || b.disabled) return;
-      const sc = scope();
+      const sc = scope(), r = S.entries[b.dataset.date];
+      // a day worked at only one place opens that place
+      const here = sc === 'all' && r && r.by ? S.data.places.filter(x => r.by[x.id] != null) : [];
       if (sc !== 'all') setPlace(sc);
+      else if (here.length === 1) setPlace(here[0].id);
       selectDate(b.dataset.date);
     });
 
